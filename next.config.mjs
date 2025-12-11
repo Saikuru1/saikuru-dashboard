@@ -2,7 +2,6 @@ const isProd = process.env.NODE_ENV === 'production';
 
 export default {
   output: 'export',
-  distDir: 'out',
   images: {
     unoptimized: true,
   },
