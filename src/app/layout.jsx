@@ -1,16 +1,18 @@
-import '@styles/globals.css';
-
 export const metadata = {
   title: 'Saikuru Protocol Dashboard',
-  description: 'Zero-cost trading dashboard for the Saikuru AI / Catapult System.'
+  description: 'Live trading dashboard for Saikuru AI / Catapult',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <main>{children}</main>
-      </body>
+      <head>
+        <link
+          rel="stylesheet"
+          href="/saikuru-dashboard/styles/globals.css"
+        />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
