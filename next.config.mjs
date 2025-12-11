@@ -1,13 +1,11 @@
 const isProd = process.env.NODE_ENV === 'production';
 
-const nextConfig = {
+export default {
   output: 'export',
   distDir: 'out',
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
-  basePath: isProd ? '/<repo-name>' : '',
-  assetPrefix: isProd ? '/<repo-name>/' : ''
+  basePath: isProd ? '/saikuru-dashboard' : '',
+  assetPrefix: isProd ? '/saikuru-dashboard/' : '',
 };
-
-export default nextConfig;
