@@ -1,10 +1,8 @@
-const isProd = process.env.NODE_ENV === 'production';
-
-export default {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   output: 'export',
-  images: {
-    unoptimized: true,
-  },
-  basePath: isProd ? '/saikuru-dashboard' : '',
-  assetPrefix: isProd ? '/saikuru-dashboard/' : '',
+  basePath: '/saikuru-dashboard',
+  assetPrefix: '/saikuru-dashboard/',
 };
+
+export default nextConfig;

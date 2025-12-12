@@ -1,4 +1,38 @@
-@import './theme.css';
+/* ================================
+   Saikuru Theme + Global Styles
+   Single global stylesheet
+   ================================ */
+
+/* ---------- Theme Variables ---------- */
+
+:root {
+  --bg-main: #050608;
+  --bg-panel: #111317;
+  --bg-panel-soft: #151922;
+  --border-subtle: #252a33;
+
+  --text-primary: #f7f7ff;
+  --text-secondary: #a7afc4;
+  --text-muted: #6f7687;
+
+  --accent: #f9c835;          /* Saikuru yellow */
+  --accent-soft: rgba(249, 200, 53, 0.08);
+  --accent-strong: #ffdd4a;
+
+  --danger: #ff4d6a;
+  --success: #41e39b;
+
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.75);
+}
+
+/* ---------- Base Reset ---------- */
 
 *,
 *::before,
@@ -28,7 +62,7 @@ main {
   min-height: 100vh;
 }
 
-/* Layout */
+/* ---------- Layout ---------- */
 
 .app-shell {
   max-width: 1120px;
@@ -41,7 +75,7 @@ main {
   gap: 18px;
 }
 
-/* Panels */
+/* ---------- Panels ---------- */
 
 .panel {
   background: var(--bg-panel);
@@ -75,7 +109,7 @@ main {
   color: var(--text-muted);
 }
 
-/* Metric card */
+/* ---------- Metric Cards ---------- */
 
 .metric-grid {
   display: grid;
@@ -108,7 +142,7 @@ main {
   color: var(--text-secondary);
 }
 
-/* Table */
+/* ---------- Tables ---------- */
 
 .table-wrapper {
   max-height: 360px;
@@ -146,7 +180,7 @@ main {
   background: rgba(255, 255, 255, 0.02);
 }
 
-/* Status tags */
+/* ---------- Status Tags ---------- */
 
 .tag-neutral {
   border-radius: var(--radius-pill);
@@ -172,7 +206,7 @@ main {
   color: var(--danger);
 }
 
-/* Header */
+/* ---------- Header ---------- */
 
 .app-header {
   display: flex;
@@ -227,7 +261,7 @@ main {
   color: var(--text-secondary);
 }
 
-/* Responsive */
+/* ---------- Responsive ---------- */
 
 @media (min-width: 880px) {
   .grid-two {
