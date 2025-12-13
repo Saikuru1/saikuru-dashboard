@@ -1,17 +1,16 @@
-.app-shell {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* src/components/layout/AppShell.module.css */
+
+.shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 80px;
 }
 
-.app-header {
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border-card);
+.header {
+  margin-bottom: 24px;
 }
 
-.app-main {
-  flex: 1;
-  padding: 24px;
+.main {
   display: flex;
   flex-direction: column;
   gap: 24px;
