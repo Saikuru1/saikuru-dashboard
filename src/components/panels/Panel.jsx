@@ -4,8 +4,8 @@ import clsx from 'clsx';
 export default function Panel({
   title,
   subtitle,
-  headerRight,
   status,
+  headerRight,
   footer,
   children,
 }) {
@@ -18,7 +18,7 @@ export default function Panel({
     >
       {(title || headerRight) && (
         <header className={styles.header}>
-          <div className={styles.headerText}>
+          <div>
             {title && <h2 className={styles.title}>{title}</h2>}
             {subtitle && (
               <span className={styles.subtitle}>{subtitle}</span>
@@ -33,15 +33,9 @@ export default function Panel({
         </header>
       )}
 
-      <div className={styles.content}>
-        {children}
-      </div>
+      <div className={styles.content}>{children}</div>
 
-      {footer && (
-        <footer className={styles.footer}>
-          {footer}
-        </footer>
-      )}
+      {footer && <footer className={styles.footer}>{footer}</footer>}
     </section>
   );
 }

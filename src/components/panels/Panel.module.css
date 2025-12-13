@@ -5,25 +5,16 @@
   padding: 16px;
 }
 
-/* Header */
-
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 12px;
 }
 
-.headerText {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
 .title {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
 }
 
 .subtitle {
@@ -33,17 +24,12 @@
 
 .headerRight {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
-
-/* Content */
 
 .content {
   font-size: 0.85rem;
 }
-
-/* Footer */
 
 .footer {
   margin-top: 12px;
@@ -53,8 +39,7 @@
   color: var(--text-muted);
 }
 
-/* Status hooks (future Saikuru Cat logic) */
-
+/* Status hooks (future Cat logic) */
 .status-success {
   border-color: var(--accent-green);
 }
