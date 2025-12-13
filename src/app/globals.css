@@ -1,6 +1,23 @@
-@import '../styles/tokens.css';
-@import '../styles/layout.css';
-@import '../styles/animations.css';
+/* ===========================
+   SAiKURU DESIGN TOKENS
+=========================== */
+
+:root {
+  --bg-main: #0e0f1a;
+  --bg-card: rgba(255, 255, 255, 0.06);
+  --border-card: rgba(255, 255, 255, 0.12);
+
+  --accent-purple: #8b7cff;
+  --accent-green: #2de38a;
+  --accent-gold: #f2c94c;
+
+  --text-primary: #e9ebf1;
+  --text-muted: #9aa0b4;
+}
+
+/* ===========================
+   GLOBAL RESET
+=========================== */
 
 *,
 *::before,
@@ -16,7 +33,7 @@ body {
   background: var(--bg-main);
   color: var(--text-primary);
   font-family: system-ui, -apple-system, BlinkMacSystemFont,
-               'Segoe UI', Roboto, sans-serif;
+    'Segoe UI', Roboto, sans-serif;
 }
 
 a {
@@ -27,4 +44,34 @@ a {
 img {
   max-width: 100%;
   display: block;
+}
+
+/* ===========================
+   LAYOUT UTILITIES
+=========================== */
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+/* ===========================
+   ANIMATIONS (future cat hooks)
+=========================== */
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  20% { opacity: 0.6; }
+  40% { opacity: 1; }
+  60% { opacity: 0.8; }
+  100% { opacity: 1; }
 }
