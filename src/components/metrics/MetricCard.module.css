@@ -1,0 +1,26 @@
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius);
+  padding: var(--gap-md);
+}
+
+.label {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.value {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-top: var(--gap-xs);
+}
+
+.positive {
+  border-left: 3px solid var(--saikuru-gold);
+}
+
+.negative {
+  border-left: 3px solid var(--accent-red);
+}

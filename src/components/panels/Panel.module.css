@@ -1,0 +1,17 @@
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius);
+  padding: var(--gap-lg);
+}
+
+.header {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--gap-md);
+  color: var(--text-muted);
+}
+
+.content {
+  width: 100%;
+}

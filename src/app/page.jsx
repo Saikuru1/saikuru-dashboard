@@ -6,7 +6,7 @@ import OpenPositions from '@components/OpenPositions';
 import DailySignals from '@components/DailySignals';
 import WeeklySummary from '@components/WeeklySummary';
 import LedgerHistory from '@components/LedgerHistory';
-import MetricCard from '@components/MetricCard';
+import MetricCard from '@components/metrics/MetricCard';
 import { fetchOpenPositions, fetchTrades } from '@lib/fetchGithub';
 
 export default function HomePage() {
