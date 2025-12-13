@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import TimeframeSelector from './controls/TimeframeSelector';
+import TimeFrameSelector from './controls/TimeFrameSelector';
 
 const TIMEFRAMES = [
   { label: '1W', days: 7 },
@@ -28,7 +28,7 @@ export default function WeeklySummary({ trades = [] }) {
 
   return (
     <>
-      <TimeframeSelector value={range} onChange={setRange} />
+      <TimeFrameSelector value={range} onChange={setRange} />
 
       <div style={{ marginTop: 12, fontSize: '1.4rem', fontWeight: 600 }}>
         {pnl >= 0 ? '+' : ''}
