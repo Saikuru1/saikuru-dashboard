@@ -1,41 +1,63 @@
 .panel {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border-card);
   border-radius: 14px;
   padding: 16px;
+  transition: border-color 0.25s ease;
+  overflow: hidden;
 }
 
+/* Glow layer */
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    120% 120% at 50% 0%,
+    rgba(139, 124, 255, 0.35),
+    transparent 60%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* Default hover glow (purple) */
+.panel:hover::before {
+  opacity: 1;
+}
+
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  gap: 12px;
 }
 
 .title {
   font-size: 0.95rem;
   font-weight: 600;
-  margin: 0;
 }
 
 .subtitle {
-  display: block;
-  margin-top: 2px;
   font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .headerRight {
   display: flex;
-  align-items: center;
   gap: 6px;
 }
 
+/* Content */
 .content {
   font-size: 0.85rem;
 }
 
+/* Footer */
 .footer {
   margin-top: 12px;
   padding-top: 10px;
@@ -44,15 +66,33 @@
   color: var(--text-muted);
 }
 
-/* Status hooks */
-.status-success {
-  border-color: var(--accent-green);
+/* ===========================
+   STATUS VARIANTS
+=========================== */
+
+/* SUCCESS (green glow) */
+.status-success::before {
+  background: radial-gradient(
+    120% 120% at 50% 0%,
+    rgba(45, 227, 138, 0.35),
+    transparent 60%
+  );
 }
 
-.status-warning {
+/* WARNING (gold glow) */
+.status-warning::before {
+  background: radial-gradient(
+    120% 120% at 50% 0%,
+    rgba(242, 201, 76, 0.45),
+    transparent 60%
+  );
+}
+
+/* ACTIVE (stronger gold focus) */
+.status-active {
   border-color: var(--accent-gold);
 }
 
-.status-active {
-  box-shadow: 0 0 0 1px var(--accent-gold);
+.status-active::before {
+  opacity: 1;
 }
