@@ -20,30 +20,35 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
+
     async function load() {
       setLoading(true);
-      const [positions, trades] = await Promise.all([
-        fetchOpenPositions(),
-        fetchTrades()
-      ]);
-      setOpenPositions(positions || []);
-      setTrades(trades || []);
-      setLoading(false);
+      try {
+        const [positions, t] = await Promise.all([fetchOpenPositions(), fetchTrades()]);
+        if (!cancelled) {
+          setOpenPositions(Array.isArray(positions) ? positions : []);
+          setTrades(Array.isArray(t) ? t : []);
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     }
+
     load();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   return (
     <AppShell header={<Header />}>
-      
-      {/* METRICS */}
       <section className="metrics-grid">
         <MetricCard label="Open Positions" value={openPositions.length} />
         <MetricCard label="Ledger Entries" value={trades.length} />
         <MetricCard label="Last Sync" value={new Date().toLocaleTimeString()} />
       </section>
 
-      {/* PRIMARY PANELS */}
       <section className="grid-two">
         <Panel title="Open Positions">
           <OpenPositions loading={loading} positions={openPositions} />
@@ -54,11 +59,13 @@ export default function HomePage() {
         </Panel>
       </section>
 
-      {/* LEDGER */}
+      <Panel title="Performance Summary" subtitle="Selectable PnL window">
+        <WeeklySummary trades={trades} />
+      </Panel>
+
       <Panel title="Trade Ledger">
         <LedgerHistory trades={trades} loading={loading} />
       </Panel>
-
     </AppShell>
   );
 }

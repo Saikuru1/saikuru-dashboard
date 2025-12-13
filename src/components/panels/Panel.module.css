@@ -10,20 +10,25 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  gap: 12px;
 }
 
 .title {
   font-size: 0.95rem;
   font-weight: 600;
+  margin: 0;
 }
 
 .subtitle {
+  display: block;
+  margin-top: 2px;
   font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .headerRight {
   display: flex;
+  align-items: center;
   gap: 6px;
 }
 
@@ -39,7 +44,7 @@
   color: var(--text-muted);
 }
 
-/* Status hooks (future Cat logic) */
+/* Status hooks */
 .status-success {
   border-color: var(--accent-green);
 }
