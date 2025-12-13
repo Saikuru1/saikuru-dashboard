@@ -1,17 +1,43 @@
 .panel {
   background: var(--bg-card);
   border: 1px solid var(--border-card);
-  border-radius: var(--radius);
-  padding: var(--gap-lg);
+  border-radius: 14px;
+  padding: 16px;
 }
 
 .header {
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  margin-bottom: var(--gap-md);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 0.75rem;
   color: var(--text-muted);
 }
 
 .content {
-  width: 100%;
+  display: block;
+}
+
+.footer {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-card);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Status variants (future Cat logic hooks) */
+.status-success {
+  border-color: var(--accent-green);
+}
+
+.status-warning {
+  border-color: var(--accent-gold);
+}
+
+.status-active {
+  box-shadow: 0 0 0 1px var(--accent-gold);
 }
