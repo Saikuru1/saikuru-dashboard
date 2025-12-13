@@ -1,8 +1,8 @@
-import styles from './TimeframeSelector.module.css';
+import styles from './TimeFrameSelector.module.css';
 
 const OPTIONS = ['1W', '1M', '3M', '1Y', '∞'];
 
-export default function TimeframeSelector({ value, onChange }) {
+export default function TimeFrameSelector({ value, onChange }) {
   return (
     <div className={styles.selector}>
       {OPTIONS.map(option => (
