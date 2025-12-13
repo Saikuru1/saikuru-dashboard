@@ -47,25 +47,57 @@ img {
 }
 
 /* ===========================
-   LAYOUT UTILITIES
+   APP SHELL LAYOUT
+=========================== */
+
+.app-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.app-shell > header {
+  margin-bottom: 24px;
+}
+
+/* ===========================
+   GRID UTILITIES
 =========================== */
 
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .grid-two {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 /* ===========================
-   ANIMATIONS (future cat hooks)
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 900px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .app-shell {
+    padding: 16px;
+  }
+}
+
+/* ===========================
+   ANIMATIONS (future hooks)
 =========================== */
 
 @keyframes flicker {
