@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import Panel from './panels/Panel';
 import TimeFrameSelector from './controls/TimeFrameSelector';
 
 const TIMEFRAMES = [
@@ -27,17 +28,19 @@ export default function WeeklySummary({ trades = [] }) {
   }, [filteredTrades]);
 
   return (
-    <>
-      <TimeFrameSelector value={range} onChange={setRange} />
-
-      <div style={{ marginTop: 12, fontSize: '1.4rem', fontWeight: 600 }}>
+    <Panel
+      title="Performance Summary"
+      subtitle={`${range} PnL`}
+      headerRight={
+        <TimeFrameSelector value={range} onChange={setRange} />
+      }
+      status={pnl >= 0 ? 'success' : 'warning'}
+      footer={`Trades counted: ${filteredTrades.length}`}
+    >
+      <div style={{ fontSize: '1.4rem', fontWeight: 600 }}>
         {pnl >= 0 ? '+' : ''}
         {pnl.toFixed(2)}%
       </div>
-
-      <div style={{ marginTop: 6, fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-        Trades counted: {filteredTrades.length}
-      </div>
-    </>
+    </Panel>
   );
 }
