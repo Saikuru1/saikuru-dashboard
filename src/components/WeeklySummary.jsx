@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Panel from './panels/Panel';
+import TimeframeSelector from './controls/TimeframeSelector';
 
 const TIMEFRAMES = [
   { label: '1W', days: 7 },
@@ -26,46 +26,18 @@ export default function WeeklySummary({ trades = [] }) {
     return filteredTrades.reduce((sum, t) => sum + (t.pnl || 0), 0);
   }, [filteredTrades]);
 
-  const headerRight = (
-    <div style={{ display: 'flex', gap: 6 }}>
-      {TIMEFRAMES.map(t => (
-        <button
-          key={t.label}
-          onClick={() => setRange(t.label)}
-          style={{
-            fontSize: '0.7rem',
-            padding: '4px 8px',
-            borderRadius: 6,
-            border: '1px solid var(--border-card)',
-            background:
-              range === t.label
-                ? 'var(--accent-gold)'
-                : 'transparent',
-            color:
-              range === t.label
-                ? '#000'
-                : 'var(--text-muted)',
-            cursor: 'pointer',
-          }}
-        >
-          {t.label}
-        </button>
-      ))}
-    </div>
-  );
-
   return (
-    <Panel
-      title="Performance Summary"
-      subtitle={`${range} PnL`}
-      headerRight={headerRight}
-      status={pnl >= 0 ? 'success' : 'warning'}
-      footer={`Trades counted: ${filteredTrades.length}`}
-    >
-      <div style={{ fontSize: '1.4rem', fontWeight: 600 }}>
+    <>
+      <TimeframeSelector value={range} onChange={setRange} />
+
+      <div style={{ marginTop: 12, fontSize: '1.4rem', fontWeight: 600 }}>
         {pnl >= 0 ? '+' : ''}
         {pnl.toFixed(2)}%
       </div>
-    </Panel>
+
+      <div style={{ marginTop: 6, fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+        Trades counted: {filteredTrades.length}
+      </div>
+    </>
   );
 }
