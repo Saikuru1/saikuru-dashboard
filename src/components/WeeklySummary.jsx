@@ -49,32 +49,41 @@ export default function WeeklySummary({ trades = [] }) {
   return (
     <Panel
       title="Performance Summary"
-      subtitle={`${range} performance`}
+      subtitle={`${range} window`}
       status={stats.pnl >= 0 ? 'success' : 'warning'}
       headerRight={
         <TimeFrameSelector value={range} onChange={setRange} />
       }
       footer={`Trades counted: ${filteredTrades.length}`}
     >
-      <div className="perf-grid">
-        <div className="perf-item primary">
-          <span>PnL</span>
-          <strong>{stats.pnl >= 0 ? '+' : ''}{stats.pnl.toFixed(2)}%</strong>
+      <div className="performance-metrics">
+        <div className="performance-metric">
+          <div className="performance-label">PnL</div>
+          <div className="performance-value">
+            {stats.pnl >= 0 ? '+' : ''}
+            {stats.pnl.toFixed(2)}%
+          </div>
         </div>
 
-        <div className="perf-item">
-          <span>Win %</span>
-          <strong>{stats.winRate.toFixed(1)}%</strong>
+        <div className="performance-metric">
+          <div className="performance-label">Win %</div>
+          <div className="performance-value">
+            {stats.winRate.toFixed(1)}%
+          </div>
         </div>
 
-        <div className="perf-item">
-          <span>Best Trade</span>
-          <strong>+{stats.best.toFixed(2)}%</strong>
+        <div className="performance-metric">
+          <div className="performance-label">Best Trade</div>
+          <div className="performance-value">
+            +{stats.best.toFixed(2)}%
+          </div>
         </div>
 
-        <div className="perf-item">
-          <span>Worst Trade</span>
-          <strong>{stats.worst.toFixed(2)}%</strong>
+        <div className="performance-metric">
+          <div className="performance-label">Worst Trade</div>
+          <div className="performance-value">
+            {stats.worst.toFixed(2)}%
+          </div>
         </div>
       </div>
     </Panel>

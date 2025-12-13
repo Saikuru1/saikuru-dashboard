@@ -152,40 +152,35 @@ img {
   border: 1px solid rgba(255, 255, 255, 0.12);
 
   color: var(--text-muted);
-}/* ===========================
-   PERFORMANCE SUMMARY
+}
+/* ===========================
+   PERFORMANCE SUMMARY METRICS
 =========================== */
 
-.perf-grid {
+.performance-metrics {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 12px;
 }
 
-.perf-item {
-  background: rgba(255,255,255,0.04);
+.performance-metric {
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-card);
   border-radius: 10px;
   padding: 12px;
-}
-
-.perf-item span {
-  display: block;
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-}
-
-.perf-item strong {
-  font-size: 1.05rem;
-  font-weight: 600;
-}
-
-.perf-item.primary {
-  grid-column: span 2;
   text-align: center;
 }
 
-.perf-item.primary strong {
-  font-size: 1.6rem;
+.performance-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.performance-value {
+  font-size: 1.1rem;
+  font-weight: 600;
 }
