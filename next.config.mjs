@@ -2,11 +2,11 @@
 const nextConfig = {
   output: 'export',
   basePath: '/saikuru-dashboard',
-  assetPrefix: '/saikuru-dashboard/',
+  assetPrefix: '/saikuru-dashboard',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
 };
 
 export default nextConfig;
