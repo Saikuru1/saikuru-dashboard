@@ -3,30 +3,25 @@ import styles from './Panel.module.css';
 export default function Panel({
   title,
   subtitle,
-  status,
-  headerRight,
-  footer,
+  status,       // "success" | "warning" | "active" | undefined
+  headerRight,  // React node
+  footer,       // React node or string
   children,
 }) {
+  const statusClass = status ? styles[`status-${status}`] : '';
+  const className = `${styles.panel} ${statusClass}`.trim();
+
   return (
-    <section
-      className={`${styles.panel} ${
-        status ? styles[`status-${status}`] : ''
-      }`}
-    >
+    <section className={className}>
       {(title || headerRight) && (
         <header className={styles.header}>
           <div>
             {title && <h2 className={styles.title}>{title}</h2>}
-            {subtitle && (
-              <span className={styles.subtitle}>{subtitle}</span>
-            )}
+            {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
           </div>
 
           {headerRight && (
-            <div className={styles.headerRight}>
-              {headerRight}
-            </div>
+            <div className={styles.headerRight}>{headerRight}</div>
           )}
         </header>
       )}
