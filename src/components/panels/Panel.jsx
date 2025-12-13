@@ -1,5 +1,4 @@
 import styles from './Panel.module.css';
-import clsx from 'clsx';
 
 export default function Panel({
   title,
@@ -11,10 +10,9 @@ export default function Panel({
 }) {
   return (
     <section
-      className={clsx(
-        styles.panel,
-        status && styles[`status-${status}`]
-      )}
+      className={`${styles.panel} ${
+        status ? styles[`status-${status}`] : ''
+      }`}
     >
       {(title || headerRight) && (
         <header className={styles.header}>

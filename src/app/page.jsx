@@ -55,9 +55,7 @@ export default function HomePage() {
       </section>
 
       {/* WEEKLY SUMMARY */}
-      <Panel title="Performance Summary">
-        <WeeklySummary trades={trades} />
-      </Panel>
+      <WeeklySummary trades={trades} />
 
       {/* LEDGER */}
       <Panel title="Trade Ledger">
