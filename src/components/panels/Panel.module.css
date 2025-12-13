@@ -5,7 +5,7 @@
   padding: 16px;
 }
 
-/* ---------- Header ---------- */
+/* Header */
 
 .header {
   display: flex;
@@ -14,15 +14,19 @@
   margin-bottom: 12px;
 }
 
-.headerText h2 {
-  margin: 0;
+.headerText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
   font-size: 0.9rem;
   font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 .subtitle {
-  display: block;
-  margin-top: 2px;
   font-size: 0.75rem;
   color: var(--text-muted);
 }
@@ -33,13 +37,13 @@
   gap: 8px;
 }
 
-/* ---------- Content ---------- */
+/* Content */
 
 .content {
   font-size: 0.85rem;
 }
 
-/* ---------- Footer ---------- */
+/* Footer */
 
 .footer {
   margin-top: 12px;
@@ -49,7 +53,7 @@
   color: var(--text-muted);
 }
 
-/* ---------- Status variants (Saikuru Cat hooks) ---------- */
+/* Status hooks (future Saikuru Cat logic) */
 
 .status-success {
   border-color: var(--accent-green);
