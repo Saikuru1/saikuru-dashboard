@@ -6,6 +6,7 @@ export default function Panel({
   subtitle,
   status,
   actions,
+  headerRight,
   footer,
   children,
 }) {
@@ -16,19 +17,32 @@ export default function Panel({
         status && styles[`status-${status}`]
       )}
     >
-      {(title || actions) && (
+      {(title || actions || headerRight) && (
         <header className={styles.header}>
-          <div>
-            {title && <h2>{title}</h2>}
-            {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
+          <div className={styles.headerText}>
+            {title && <h2 className={styles.title}>{title}</h2>}
+            {subtitle && (
+              <span className={styles.subtitle}>{subtitle}</span>
+            )}
           </div>
-          {actions && <div className={styles.actions}>{actions}</div>}
+
+          {(actions || headerRight) && (
+            <div className={styles.actions}>
+              {actions || headerRight}
+            </div>
+          )}
         </header>
       )}
 
-      <div className={styles.content}>{children}</div>
+      <div className={styles.content}>
+        {children}
+      </div>
 
-      {footer && <footer className={styles.footer}>{footer}</footer>}
+      {footer && (
+        <footer className={styles.footer}>
+          {footer}
+        </footer>
+      )}
     </section>
   );
 }

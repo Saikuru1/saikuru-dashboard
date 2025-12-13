@@ -1,0 +1,25 @@
+.selector {
+  display: flex;
+  gap: 6px;
+}
+
+.button {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-card);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.button:hover {
+  border-color: var(--accent-purple);
+  color: var(--text-primary);
+}
+
+.active {
+  background: var(--accent-purple);
+  color: #fff;
+  border-color: var(--accent-purple);
+}
