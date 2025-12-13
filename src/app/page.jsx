@@ -59,9 +59,8 @@ export default function HomePage() {
         </Panel>
       </section>
 
-      <Panel title="Performance Summary" subtitle="Selectable PnL window">
-        <WeeklySummary trades={trades} />
-      </Panel>
+      {/* WEEKLY SUMMARY */}
+      <WeeklySummary trades={trades} />
 
       <Panel title="Trade Ledger">
         <LedgerHistory trades={trades} loading={loading} />
