@@ -25,23 +25,57 @@ export default function WeeklySummary({ trades = [] }) {
     );
   }, [trades, range]);
 
-  const pnl = useMemo(() => {
-    return filteredTrades.reduce((sum, t) => sum + (t.pnl || 0), 0);
+  const stats = useMemo(() => {
+    if (!filteredTrades.length) {
+      return {
+        pnl: 0,
+        winRate: 0,
+        best: 0,
+        worst: 0,
+      };
+    }
+
+    const pnls = filteredTrades.map(t => t.pnl || 0);
+    const wins = pnls.filter(p => p > 0).length;
+
+    return {
+      pnl: pnls.reduce((a, b) => a + b, 0),
+      winRate: (wins / pnls.length) * 100,
+      best: Math.max(...pnls),
+      worst: Math.min(...pnls),
+    };
   }, [filteredTrades]);
 
   return (
     <Panel
       title="Performance Summary"
-      subtitle={`${range} PnL`}
-      status={pnl >= 0 ? 'success' : 'warning'}
+      subtitle={`${range} performance`}
+      status={stats.pnl >= 0 ? 'success' : 'warning'}
       headerRight={
         <TimeFrameSelector value={range} onChange={setRange} />
       }
       footer={`Trades counted: ${filteredTrades.length}`}
     >
-      <div style={{ fontSize: '1.4rem', fontWeight: 600 }}>
-        {pnl >= 0 ? '+' : ''}
-        {pnl.toFixed(2)}%
+      <div className="perf-grid">
+        <div className="perf-item primary">
+          <span>PnL</span>
+          <strong>{stats.pnl >= 0 ? '+' : ''}{stats.pnl.toFixed(2)}%</strong>
+        </div>
+
+        <div className="perf-item">
+          <span>Win %</span>
+          <strong>{stats.winRate.toFixed(1)}%</strong>
+        </div>
+
+        <div className="perf-item">
+          <span>Best Trade</span>
+          <strong>+{stats.best.toFixed(2)}%</strong>
+        </div>
+
+        <div className="perf-item">
+          <span>Worst Trade</span>
+          <strong>{stats.worst.toFixed(2)}%</strong>
+        </div>
       </div>
     </Panel>
   );
