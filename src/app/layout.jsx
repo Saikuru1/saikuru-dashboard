@@ -1,5 +1,5 @@
 import './globals.css';
-import '@/components/hero/saikuru-cat.css';
+import './components/hero/saikuru-cat.css';
 
 export const metadata = {
   title: 'Saikuru Protocol Dashboard',
