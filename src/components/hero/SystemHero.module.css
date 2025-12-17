@@ -1,0 +1,101 @@
+.hero {
+  margin-bottom: 28px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 28px;
+  border-radius: 18px;
+
+  background: radial-gradient(
+    120% 120% at 0% 0%,
+    rgba(139, 124, 255, 0.12),
+    rgba(14, 15, 26, 0.95)
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.left {
+  flex-shrink: 0;
+}
+
+/* 🐱 Saikuru Cat */
+.cat {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: url('/cat/saikuru_cat_yellow.png') center / contain no-repeat;
+  transition: box-shadow 0.4s ease, filter 0.4s ease;
+}
+
+/* States */
+.idle {
+  box-shadow: none;
+  filter: none;
+}
+
+.active {
+  box-shadow: 0 0 28px rgba(242, 201, 76, 0.45);
+}
+
+.high {
+  box-shadow:
+    0 0 32px rgba(242, 201, 76, 0.75),
+    0 0 64px rgba(242, 201, 76, 0.35);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* RIGHT */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px 24px;
+}
+
+.asset {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.symbol {
+  width: 40px;
+  color: var(--text-primary);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.on {
+  background: var(--accent-green);
+  box-shadow: 0 0 6px rgba(45, 227, 138, 0.8);
+}
+
+.off {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.caption {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
