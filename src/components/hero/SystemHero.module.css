@@ -27,7 +27,7 @@
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  background: url('/cat/saikuru_cat_yellow.png') center / contain no-repeat;
+  background: url('/saikuru-dashboard/cat/saikuru_cat_yellow.png') center / contain no-repeat;
   transition: box-shadow 0.4s ease, filter 0.4s ease;
 }
 
