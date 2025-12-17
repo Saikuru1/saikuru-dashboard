@@ -57,7 +57,7 @@ img {
 }
 
 .app-shell > header {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 /* ===========================
@@ -107,24 +107,31 @@ img {
   60% { opacity: 0.8; }
   100% { opacity: 1; }
 }
+
 /* ===========================
-   HEADER
+   HEADER (REFINED)
 =========================== */
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 24px;
-  margin-bottom: 24px;
+
+  padding: 18px 22px;
+  margin-bottom: 28px;
 
   background: linear-gradient(
     180deg,
-    rgba(20, 22, 40, 0.9),
-    rgba(14, 15, 26, 0.9)
+    rgba(26, 28, 48, 0.95),
+    rgba(14, 15, 26, 0.95)
   );
 
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+
+  /* soft separation instead of a hard line */
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .header-left {
@@ -134,25 +141,26 @@ img {
 }
 
 .header-left .logo {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
 }
 
 .header-left .title {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.04em;
 }
 
 .header-right .cat-status {
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
 
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
 
   color: var(--text-muted);
 }
+
 /* ===========================
    PERFORMANCE SUMMARY METRICS
 =========================== */

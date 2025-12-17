@@ -11,6 +11,7 @@ import DailySignals from '@components/DailySignals';
 import WeeklySummary from '@components/WeeklySummary';
 import LedgerHistory from '@components/LedgerHistory';
 import MetricCard from '@components/metrics/MetricCard';
+import HeroStatus from '@components/hero/HeroStatus';
 
 import { fetchOpenPositions, fetchTrades } from '@lib/fetchGithub';
 
@@ -43,11 +44,8 @@ export default function HomePage() {
 
   return (
     <AppShell header={<Header />}>
-      <section className="metrics-grid">
-        <MetricCard label="Open Positions" value={openPositions.length} />
-        <MetricCard label="Ledger Entries" value={trades.length} />
-        <MetricCard label="Last Sync" value={new Date().toLocaleTimeString()} />
-      </section>
+      <HeroStatus status="idle"
+      message="Saikuru Protocol monitors markets and reports validated long-side opportunites." />
 
       <section className="grid-two">
         <Panel title="Open Positions">

@@ -1,0 +1,103 @@
+.hero {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  align-items: center;
+
+  padding: 20px 24px;
+  margin-bottom: 24px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.02)
+  );
+
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+}
+
+/* CAT AREA */
+.catArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.catPlaceholder {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at top,
+    var(--accent-gold),
+    #c9a227
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2rem;
+  box-shadow:
+    0 0 24px rgba(242,201,76,0.35);
+}
+
+/* INFO AREA */
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.message {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+/* STATUS */
+.statusRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.idle {
+  background: #888;
+}
+
+.syncing {
+  background: var(--accent-purple);
+  box-shadow: 0 0 8px var(--accent-purple);
+}
+
+.active {
+  background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+}
+
+.error {
+  background: #ff5a5a;
+  box-shadow: 0 0 8px #ff5a5a;
+}
+
+.statusLabel {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
