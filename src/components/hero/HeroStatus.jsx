@@ -2,36 +2,22 @@
 
 import styles from './HeroStatus.module.css';
 
-export default function HeroStatus({
-  status = 'idle', // idle | syncing | active | error
-  message = 'System standing by. Monitoring markets.'
-}) {
+export default function HeroStatus() {
   return (
     <section className={styles.hero}>
-      {/* LEFT — Saikuru Cat presence */}
-      <div className={styles.catArea}>
-        <div className={styles.catPlaceholder}>
-          {/* Placeholder for future animation */}
-          🐱
+      <div className={styles.card}>
+        <div className={styles.left}>
+          <div className={styles.cat}>
+            🐱
+          </div>
         </div>
-      </div>
 
-      {/* RIGHT — System messaging */}
-      <div className={styles.info}>
-        <h1 className={styles.title}>SAIKURU PROTOCOL</h1>
+        <div className={styles.right}>
+          <p className={styles.message}>
+            Saikuru Protocol monitors markets and reports validated
+            long-side opportunities.
+          </p>
 
-        <p className={styles.message}>
-          {message}
-        </p>
-
-        <div className={styles.statusRow}>
-          <span className={`${styles.dot} ${styles[status]}`} />
-          <span className={styles.statusLabel}>
-            {status === 'idle' && 'Idle'}
-            {status === 'syncing' && 'Syncing'}
-            {status === 'active' && 'Active'}
-            {status === 'error' && 'Error'}
-          </span>
         </div>
       </div>
     </section>
