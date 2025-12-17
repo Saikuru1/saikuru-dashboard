@@ -18,6 +18,7 @@ import { fetchOpenPositions, fetchTrades } from '@lib/fetchGithub';
 export default function HomePage() {
   const [openPositions, setOpenPositions] = useState([]);
   const [trades, setTrades] = useState([]);
+  const [lastUpdated, setLastUpdated] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,10 +27,15 @@ export default function HomePage() {
     async function load() {
       setLoading(true);
       try {
-        const [positions, t] = await Promise.all([fetchOpenPositions(), fetchTrades()]);
+        const [positions, tradesData] = await Promise.all([
+          fetchOpenPositions(),
+          fetchTrades()
+        ]);
+
         if (!cancelled) {
           setOpenPositions(Array.isArray(positions) ? positions : []);
-          setTrades(Array.isArray(t) ? t : []);
+          setTrades(Array.isArray(tradesData) ? tradesData : []);
+          setLastUpdated(tradesData?.metadata?.last_updated ?? null);
         }
       } finally {
         if (!cancelled) setLoading(false);
@@ -44,8 +50,10 @@ export default function HomePage() {
 
   return (
     <AppShell header={<Header />}>
-      <HeroStatus status="idle"
-      message="Saikuru Protocol monitors markets and reports validated long-side opportunites." />
+      <HeroStatus
+        lastUpdated={lastUpdated}
+        message="Saikuru Protocol monitors markets and reports validated long-side opportunities."
+      />
 
       <section className="grid-two">
         <Panel title="Open Positions">

@@ -1,0 +1,30 @@
+.saikuru-cat {
+  width: 140px;
+  height: 140px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('/saikuru-dashboard/cat/saikuru_cat_yellow.png');
+  transition: filter 0.2s ease;
+}
+
+/* Active flicker */
+.saikuru-cat.system-check {
+  animation: system-flicker 1.4s ease-out;
+}
+
+@keyframes system-flicker {
+  0%, 100% {
+    background-image: url('/saikuru-dashboard/cat/saikuru_cat_yellow.png');
+    box-shadow: none;
+    filter: none;
+  }
+
+  20%, 40% {
+    background-image: url('/saikuru-dashboard/cat/saikuru_cat_xray.png');
+    filter: brightness(2.4);
+    box-shadow:
+      0 0 24px rgba(0, 255, 220, 0.8),
+      0 0 48px rgba(0, 255, 220, 0.4);
+  }
+}
