@@ -1,3 +1,3 @@
-:HL["/saikuru-dashboard/_next/static/chunks/ce4be90b3d331b8d.css","style"]
+:HL["/saikuru-dashboard/_next/static/chunks/3d9a10b5b0470a2c.css","style"]
 :HL["/saikuru-dashboard/_next/static/chunks/a3b34315f626016c.css","style"]
-0:{"buildId":"nNE5gRWaF4H22WP1qOrud","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"lem-research","paramType":null,"paramKey":"lem-research","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"6hfRGM7WXV_yY6KcLgCxF","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"lem-research","paramType":null,"paramKey":"lem-research","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
