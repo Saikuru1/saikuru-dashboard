@@ -4,6 +4,16 @@ import Link from 'next/link';
 import styles from './LemPreview.module.css';
 import SimpleLineChart from './SimpleLineChart';
 
+/**
+ * Static demo data for preview only.
+ * This is NOT canonical data.
+ */
+const DEMO_DATA = Array.from({ length: 32 }).map((_, i) => ({
+  x: i,
+  a: Math.sin(i / 5) * 20 + 50,   // LEM (demo)
+  b: Math.cos(i / 6) * 15 + 40,   // Price (demo)
+}));
+
 export default function LemPreview() {
   return (
     <div className={styles.preview}>
@@ -28,7 +38,7 @@ export default function LemPreview() {
           title={null}
           aLabel="LEM"
           bLabel="Price"
-          data={[]}   // intentionally empty preview (handled later)
+          data={DEMO_DATA}   // intentionally empty preview (handled later)
         />
       </div>
     </div>
