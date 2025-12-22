@@ -1,3 +1,6 @@
+'use client';
+
+import Link from 'next/link';
 import styles from './LemPreview.module.css';
 import SimpleLineChart from './SimpleLineChart';
 
@@ -7,21 +10,26 @@ export default function LemPreview() {
       {/* TOP — Description + CTA */}
       <div className={styles.header}>
         <div>
-          <h3 className={styles.title}>LEM Research Lab 🧪</h3>
-          <p className={styles.subtitle}>
+          <h3>LEM Research Lab 🧪</h3>
+          <p>
             Liquidity structure observatory.
             Price • LPₙ • Market Cap • LEM
           </p>
         </div>
 
-        <a href="/lem-research" className={styles.cta}>
+        <Link href="/lem-research" className={styles.cta}>
           Enter the LEM Lab 🧪
-        </a>
+        </Link>
       </div>
 
       {/* BOTTOM — Chart preview */}
       <div className={styles.chart}>
-        <SimpleLineChart />
+        <SimpleLineChart
+          title="Preview"
+          aLabel="LEM"
+          bLabel="Price"
+          data={[]}   // intentionally empty preview
+        />
       </div>
     </div>
   );
