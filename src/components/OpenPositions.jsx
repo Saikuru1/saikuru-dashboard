@@ -1,40 +1,58 @@
 export default function OpenPositions({ loading, positions }) {
-  if ((!positions || positions.length === 0) && !loading) {
+  if (loading) {
+    return <p className="muted">Loading…</p>;
+  }
+
+  if (!positions || positions.length === 0) {
     return (
-      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+      <p className="muted">
         No open positions right now. Saikuru Cat is patiently waiting.
       </p>
     );
   }
 
   return (
-    <div className="table-wrapper">
-      <table className="saikuru-table">
-        <thead>
-          <tr>
-            <th>Symbol</th>
-            <th>Entry</th>
-            <th>Frame</th>
-            <th>Stop</th>
-            <th>Current</th>
-            <th>PnL %</th>
-          </tr>
-        </thead>
-        <tbody>
-          {(positions || []).map((p, idx) => (
-            <tr key={p.id ?? p.symbol ?? idx}>
-              <td>{p.symbol || '--'}</td>
-              <td>{p.entry_price ?? p.entry ?? '--'}</td>
-              <td>{p.frame || p.timeframe || '—'}</td>
-              <td>{p.stop ?? p.stop_price ?? '—'}</td>
-              <td>{p.current ?? p.last_price ?? '—'}</td>
-              <td className={Number(p.pnl_pct) >= 0 ? 'tag-profit' : 'tag-loss'}>
-                {p.pnl_pct !== undefined ? `${p.pnl_pct}%` : '—'}
+    <table className="saikuru-table">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Entry</th>
+          <th>Frame</th>
+          <th>Stop</th>
+          <th>PnL %</th>
+        </tr>
+      </thead>
+      <tbody>
+        {positions.map(p => {
+          const entry = Number(p.entry_price);
+          const stop = Number(p.active_stop);
+
+          const pnlPct =
+            entry && stop
+              ? ((stop - entry) / entry) * 100
+              : null;
+
+          return (
+            <tr key={p.id}>
+              <td>{p.symbol}</td>
+              <td>{entry.toFixed(2)}</td>
+              <td>{p.frame || '—'}</td>
+              <td>{stop ? stop.toFixed(2) : '—'}</td>
+              <td
+                className={
+                  pnlPct !== null
+                    ? pnlPct >= 0
+                      ? 'tag-profit'
+                      : 'tag-loss'
+                    : ''
+                }
+              >
+                {pnlPct !== null ? `${pnlPct.toFixed(2)}%` : '—'}
               </td>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          );
+        })}
+      </tbody>
+    </table>
   );
 }

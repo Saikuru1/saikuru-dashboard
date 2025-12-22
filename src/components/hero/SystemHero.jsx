@@ -5,11 +5,15 @@ import styles from './SystemHero.module.css';
 const ASSETS = ['BTC', 'ETH', 'BNB', 'BCH', 'DOGE', 'ADA'];
 
 export default function SystemHero({ openPositions = [] }) {
-  const activeSymbols = new Set(
-    openPositions.map(p => p.symbol).filter(Boolean)
+  // Normalize active symbols like BTCUSDT → BTC
+  const activeTickers = new Set(
+    openPositions
+      .map(p => p.symbol)
+      .filter(Boolean)
+      .map(sym => sym.replace('USDT', ''))
   );
 
-  const activeCount = activeSymbols.size;
+  const activeCount = activeTickers.size;
 
   let catState = styles.idle;
   if (activeCount >= 3) catState = styles.high;
@@ -27,7 +31,7 @@ export default function SystemHero({ openPositions = [] }) {
         <div className={styles.right}>
           <div className={styles.grid}>
             {ASSETS.map(symbol => {
-              const isActive = activeSymbols.has(symbol);
+              const isActive = activeTickers.has(symbol);
               return (
                 <div key={symbol} className={styles.asset}>
                   <span className={styles.symbol}>{symbol}</span>
