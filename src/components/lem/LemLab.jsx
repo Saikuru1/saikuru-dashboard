@@ -45,7 +45,7 @@ export default function LemLab() {
 
   const assets = useMemo(() => {
     const filtered = rows.filter(r => (r.chain || '').trim() === chain);
-    const m = new Map(); // pair_address -> meta
+    const m = new Map();
     for (const r of filtered) {
       const addr = (r.pair_address || '').trim();
       if (!addr) continue;
@@ -60,7 +60,6 @@ export default function LemLab() {
     return Array.from(m.values());
   }, [rows, chain]);
 
-  // auto-pick first asset
   useEffect(() => {
     if (!pair && assets.length) setPair(assets[0].pair_address);
   }, [assets, pair]);
@@ -69,16 +68,13 @@ export default function LemLab() {
     const filtered = rows
       .filter(r => (r.chain || '').trim() === chain)
       .filter(r => (r.pair_address || '').trim() === pair)
-      .map(r => {
-        const ts = Date.parse(r.timestamp_utc);
-        return {
-          ts,
-          price: toNum(r.token_price_usd),
-          lem: toNum(r.lem),
-          mc: toNum(r.market_cap_usd),
-          lpn: toNum(r.lp_native_usd),
-        };
-      })
+      .map(r => ({
+        ts: Date.parse(r.timestamp_utc),
+        price: toNum(r.token_price_usd),
+        lem: toNum(r.lem),
+        mc: toNum(r.market_cap_usd),
+        lpn: toNum(r.lp_native_usd),
+      }))
       .filter(d => Number.isFinite(d.ts))
       .sort((a, b) => a.ts - b.ts);
 
@@ -89,13 +85,15 @@ export default function LemLab() {
     return filtered.filter(d => d.ts >= cutoff);
   }, [rows, chain, pair, tf]);
 
-  const chartPriceLem = useMemo(() => {
-    return series.map(d => ({ x: d.ts, a: d.price, b: d.lem }));
-  }, [series]);
+  const chartPriceLem = useMemo(
+    () => series.map(d => ({ x: d.ts, a: d.price, b: d.lem })),
+    [series]
+  );
 
-  const chartMcLpn = useMemo(() => {
-    return series.map(d => ({ x: d.ts, a: d.mc, b: d.lpn }));
-  }, [series]);
+  const chartMcLpn = useMemo(
+    () => series.map(d => ({ x: d.ts, a: d.mc, b: d.lpn })),
+    [series]
+  );
 
   const pickedMeta = useMemo(() => {
     const found = assets.find(a => a.pair_address === pair);
@@ -104,14 +102,6 @@ export default function LemLab() {
 
   return (
     <div className={styles.wrap}>
-      <div className={styles.top}>
-        <div>
-          <h1 className={styles.h1}>LEM Research Lab 🧪</h1>
-          <p className={styles.p}>
-            Where Liquidity Reveals Risk
-          </p>
-        </div>
-      </div>
 
       <div className={styles.controls}>
         <label className={styles.label}>
