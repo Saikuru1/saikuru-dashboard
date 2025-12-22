@@ -3,6 +3,8 @@
 import styles from './SimpleLineChart.module.css';
 
 function scalePoints(data, width, height, pad, yAccessor) {
+  if (!Array.isArray(data) || data.length === 0) return '';
+
   const ys = data.map(yAccessor).filter(v => typeof v === 'number' && isFinite(v));
   const xs = data.map(d => d.x).filter(v => typeof v === 'number' && isFinite(v));
   if (!ys.length || !xs.length) return '';
@@ -15,23 +17,26 @@ function scalePoints(data, width, height, pad, yAccessor) {
   const w = Math.max(1, width - pad * 2);
   const h = Math.max(1, height - pad * 2);
 
-  const normX = (x) => pad + ((x - minX) / (maxX - minX || 1)) * w;
-  const normY = (y) => pad + (1 - (y - minY) / (maxY - minY || 1)) * h;
+  const normX = (x) =>
+    pad + ((x - minX) / (maxX - minX || 1)) * w;
+
+  const normY = (y) =>
+    pad + (1 - (y - minY) / (maxY - minY || 1)) * h;
 
   return data
     .map(d => {
       const y = yAccessor(d);
       if (typeof d.x !== 'number' || typeof y !== 'number') return null;
-      return `${normX(d.x).toFixed(2)},${normY(y).toFixed(2)}`;
+      return `${normX(d.x).toFixed(2)},'${normY(y).toFixed(2)}`;
     })
     .filter(Boolean)
     .join(' ');
 }
 
 export default function SimpleLineChart({
-  title,
+  title = '',
   subtitle,
-  data,          // [{x:number, a:number, b:number}]
+  data = [],          // ✅ safe default
   aLabel = 'A',
   bLabel = 'B',
   height = 180,
@@ -46,7 +51,7 @@ export default function SimpleLineChart({
     <div className={styles.chart}>
       <div className={styles.head}>
         <div>
-          <div className={styles.title}>{title}</div>
+          {title && <div className={styles.title}>{title}</div>}
           {subtitle && <div className={styles.sub}>{subtitle}</div>}
         </div>
 
@@ -58,8 +63,20 @@ export default function SimpleLineChart({
 
       <div className={styles.frame}>
         <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={title}>
-          <polyline className={styles.lineA} fill="none" points={pointsA} />
-          <polyline className={styles.lineB} fill="none" points={pointsB} />
+          {pointsA && (
+            <polyline
+              className={styles.lineA}
+              fill="none"
+              points={pointsA}
+            />
+          )}
+          {pointsB && (
+            <polyline
+              className={styles.lineB}
+              fill="none"
+              points={pointsB}
+            />
+          )}
         </svg>
       </div>
     </div>
