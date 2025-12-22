@@ -1,0 +1,67 @@
+.wrap {
+  margin: 18px 0 28px;
+}
+
+.card {
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  padding: 18px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.kicker {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.desc {
+  margin-top: 6px;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  opacity: 0.92;
+}
+
+.cta {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(139, 124, 255, 0.14);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.cta:hover {
+  border-color: rgba(139, 124, 255, 0.55);
+  box-shadow: 0 0 24px rgba(139, 124, 255, 0.25);
+}
+
+.glass {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+}
+
+.blur {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  opacity: 0.85;
+}
+
+.content {
+  position: relative;
+  padding: 14px;
+}

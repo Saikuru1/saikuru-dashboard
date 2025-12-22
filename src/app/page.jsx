@@ -10,8 +10,8 @@ import OpenPositions from '@components/OpenPositions';
 import DailySignals from '@components/DailySignals';
 import WeeklySummary from '@components/WeeklySummary';
 import LedgerHistory from '@components/LedgerHistory';
-import MetricCard from '@components/metrics/MetricCard';
 import SystemHero from '@components/hero/SystemHero';
+import LemPreview from '@components/lem/LemPreview';
 
 import { fetchOpenPositions, fetchTrades } from '@lib/fetchGithub';
 
@@ -50,8 +50,15 @@ export default function HomePage() {
 
   return (
     <AppShell header={<Header />}>
+      {/* SYSTEM STATUS / SENTINEL */}
       <SystemHero openPositions={openPositions} />
 
+      {/* LEM RESEARCH LAB PREVIEW */}
+      <Panel title="LEM RESEARCH LAB 🧪">
+        <LemPreview />
+      </Panel>
+
+      {/* CORE OPERATIONS */}
       <section className="grid-two">
         <Panel title="Open Positions">
           <OpenPositions loading={loading} positions={openPositions} />
@@ -62,9 +69,10 @@ export default function HomePage() {
         </Panel>
       </section>
 
-      {/* WEEKLY SUMMARY */}
+      {/* PERFORMANCE */}
       <WeeklySummary trades={trades} />
 
+      {/* LEDGER */}
       <Panel title="Trade Ledger">
         <LedgerHistory trades={trades} loading={loading} />
       </Panel>

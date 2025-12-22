@@ -1,0 +1,70 @@
+.chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.title {
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.sub {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.legend {
+  display: flex;
+  gap: 10px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.keyA::before,
+.keyB::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 999px;
+  vertical-align: -1px;
+}
+
+.keyA::before {
+  background: var(--accent-gold);
+}
+
+.keyB::before {
+  background: var(--accent-purple);
+}
+
+.frame {
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+  padding: 10px;
+  background: rgba(255,255,255,0.03);
+}
+
+.lineA {
+  stroke: var(--accent-gold);
+  stroke-width: 2.4;
+  opacity: 0.95;
+}
+
+.lineB {
+  stroke: var(--accent-purple);
+  stroke-width: 2.2;
+  opacity: 0.9;
+}
