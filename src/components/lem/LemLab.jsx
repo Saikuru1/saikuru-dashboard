@@ -108,7 +108,7 @@ export default function LemLab() {
         <div>
           <h1 className={styles.h1}>LEM Research Lab 🧪</h1>
           <p className={styles.p}>
-            Read-only visualization of liquidity structure. CSV is canonical; UI is convenience.
+            Where Liquidity Reveals Risk
           </p>
         </div>
       </div>

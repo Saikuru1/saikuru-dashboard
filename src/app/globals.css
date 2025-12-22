@@ -161,6 +161,26 @@ img {
   color: var(--text-muted);
 }
 
+.header-nav {
+  display: flex;
+  gap: 18px;
+  font-size: 0.85rem;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--text-primary);
+}
+
+.nav-link.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 /* ===========================
    PERFORMANCE SUMMARY METRICS
 =========================== */

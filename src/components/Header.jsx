@@ -7,9 +7,16 @@ export default function Header() {
         <h1 className="header-title">SAIKURU PROTOCOL</h1>
 
         <nav className="header-nav">
-          <Link href="/lem-research" className="header-link">
-            LEM Research
+          <Link href="/" className="nav-link">
+            Dashboard
           </Link>
+
+          <Link href="/lem-research" className="nav-link">
+            LEM Lab
+          </Link>
+
+          <span className="nav-link disabled">Staking</span>
+          <span className="nav-link disabled">Litepaper</span>
         </nav>
       </div>
     </header>
