@@ -33,6 +33,17 @@ function scalePoints(data, width, height, pad, yAccessor) {
     .join(' ');
 }
 
+function computeYAxisTicks(values, count = 5) {
+  if (!values.length) return [];
+
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  if (min === max) return [min];
+
+  const step = (max - min) / (count - 1);
+  return Array.from({ length: count }, (_, i) => min + step * i);
+}
+
 export default function SimpleLineChart({
   title = '',
   subtitle,
@@ -43,9 +54,19 @@ export default function SimpleLineChart({
 }) {
   const width = 720;
   const pad = 12;
+  const axisPad = 36; // space for right-side axis
 
-  const pointsA = scalePoints(data, width, height, pad, d => d.a);
-  const pointsB = scalePoints(data, width, height, pad, d => d.b);
+  const pointsA = scalePoints(data, width - axisPad, height, pad, d => d.a);
+  const pointsB = scalePoints(data, width - axisPad, height, pad, d => d.b);
+
+  const bValues = data.map(d => d.b).filter(v => typeof v === 'number');
+  const ticks = computeYAxisTicks(bValues, 5);
+
+  const minB = Math.min(...bValues);
+  const maxB = Math.max(...bValues);
+
+  const scaleY = (v) =>
+    pad + (1 - (v - minB) / (maxB - minB || 1)) * (height - pad * 2);
 
   return (
     <div className={styles.chart}>
@@ -62,7 +83,12 @@ export default function SimpleLineChart({
       </div>
 
       <div className={styles.frame}>
-        <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={title}>
+        <svg
+          viewBox={`0 0 ${width} ${height}`}
+          role="img"
+          aria-label={title}
+        >
+          {/* Series A (contextual) */}
           {pointsA && (
             <polyline
               className={styles.lineA}
@@ -70,6 +96,8 @@ export default function SimpleLineChart({
               points={pointsA}
             />
           )}
+
+          {/* Series B (structural / LEM) */}
           {pointsB && (
             <polyline
               className={styles.lineB}
@@ -77,6 +105,28 @@ export default function SimpleLineChart({
               points={pointsB}
             />
           )}
+
+          {/* Right-side Y-axis ticks for B (LEM) */}
+          {ticks.map((v, i) => (
+            <g key={i}>
+              <line
+                x1={width - axisPad}
+                x2={width - axisPad + 6}
+                y1={scaleY(v)}
+                y2={scaleY(v)}
+                stroke="rgba(255,255,255,0.25)"
+              />
+              <text
+                x={width - 2}
+                y={scaleY(v) + 4}
+                textAnchor="end"
+                fontSize="10"
+                fill="rgba(255,255,255,0.55)"
+              >
+                {v.toFixed(1)}
+              </text>
+            </g>
+          ))}
         </svg>
       </div>
     </div>
