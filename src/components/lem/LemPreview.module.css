@@ -1,17 +1,11 @@
-/* Outer wrapper spacing */
 .wrap {
   margin: 18px 0 28px;
 }
 
-/* Main preview card */
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-
   border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
   padding: 18px;
 }
 
@@ -21,6 +15,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
+  margin-bottom: 14px;
 }
 
 /* Left text block */
@@ -36,7 +31,7 @@
   color: var(--text-muted);
 }
 
-/* Description text (two-line friendly) */
+/* Description text (now visually two-line friendly) */
 .desc {
   margin-top: 6px;
   font-size: 0.95rem;
@@ -48,13 +43,12 @@
 .cta {
   padding: 10px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255,255,255,0.14);
   background: rgba(139, 124, 255, 0.14);
   color: var(--text-primary);
   font-size: 0.82rem;
   white-space: nowrap;
   align-self: flex-start;
-  text-decoration: none;
 }
 
 .cta:hover {
@@ -62,10 +56,25 @@
   box-shadow: 0 0 24px rgba(139, 124, 255, 0.25);
 }
 
-/* ===== Chart preview window ===== */
-.chart {
+/* ===== Glass preview window ===== */
+.glass {
+  position: relative;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  background: rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: rgba(255,255,255,0.03);
+}
+
+/* Frosted overlay */
+.blur {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(6px);
+  opacity: 0.85;
+}
+
+/* Chart container */
+.content {
+  position: relative;
   padding: 14px;
 }
