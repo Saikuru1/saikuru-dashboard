@@ -4,7 +4,6 @@
   gap: 10px;
 }
 
-/* Header row */
 .head {
   display: flex;
   align-items: flex-start;
@@ -23,7 +22,6 @@
   color: var(--text-muted);
 }
 
-/* Legend */
 .legend {
   display: flex;
   gap: 10px;
@@ -45,33 +43,37 @@
 }
 
 .keyA::before {
-  background: var(--accent-gold, #f2c94c);
+  background: var(--accent-gold);
 }
 
 .keyB::before {
-  background: var(--accent-purple, #9b8cff);
+  background: var(--accent-purple);
 }
 
-/* SVG frame */
+/* 🔑 FRAME MUST HAVE HEIGHT */
 .frame {
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 14px;
   padding: 10px;
   background: rgba(255,255,255,0.03);
+  min-height: 180px;
 }
 
-/* LEM line */
+/* 🔑 SVG MUST FILL FRAME */
+.frame svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .lineA {
-  stroke: var(--accent-gold, #f2c94c);
+  stroke: var(--accent-gold);
   stroke-width: 2.4;
   opacity: 0.95;
-  fill: none;
 }
 
-/* Price line */
 .lineB {
-  stroke: var(--accent-purple, #9b8cff);
+  stroke: var(--accent-purple);
   stroke-width: 2.2;
   opacity: 0.9;
-  fill: none;
 }

@@ -92,6 +92,6 @@
   flex: 1;
 }
 
-.chartWrap {
-  min-height: 220px;
+.chart {
+  margin-top: 10px;
 }

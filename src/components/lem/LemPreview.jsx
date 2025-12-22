@@ -33,7 +33,7 @@ export default function LemPreview() {
       </div>
 
       {/* CHART PREVIEW */}
-      <div className={styles.chartWrap}>
+      <div className={styles.chart}>
         <SimpleLineChart
           title={null}
           aLabel="LEM"
