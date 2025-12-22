@@ -7,12 +7,12 @@ import SimpleLineChart from './SimpleLineChart';
 export default function LemPreview() {
   return (
     <div className={styles.preview}>
-      {/* TOP — Description + CTA */}
+      {/* HEADER — Description + CTA */}
       <div className={styles.header}>
-        <div>
-          <h3>LEM Research Lab 🧪</h3>
-          <p>
+        <div className={styles.text}>
+          <p className={styles.desc}>
             Liquidity structure observatory.
+            <br />
             Price • LPₙ • Market Cap • LEM
           </p>
         </div>
@@ -22,13 +22,13 @@ export default function LemPreview() {
         </Link>
       </div>
 
-      {/* BOTTOM — Chart preview */}
+      {/* CHART PREVIEW */}
       <div className={styles.chart}>
         <SimpleLineChart
-          title="Preview"
+          title={null}
           aLabel="LEM"
           bLabel="Price"
-          data={[]}   // intentionally empty preview
+          data={[]}   // intentionally empty preview (handled later)
         />
       </div>
     </div>
