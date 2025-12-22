@@ -31,7 +31,7 @@
   color: var(--text-muted);
 }
 
-/* Description text (now visually two-line friendly) */
+/* Description text */
 .desc {
   margin-top: 6px;
   font-size: 0.95rem;
@@ -39,7 +39,7 @@
   color: var(--text-muted);
 }
 
-/* CTA — top right, visually dominant */
+/* CTA — top right */
 .cta {
   padding: 10px 14px;
   border-radius: 999px;
@@ -63,6 +63,9 @@
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.10);
   background: rgba(255,255,255,0.03);
+
+  /* 👇 THIS is the key */
+  min-height: 200px;
 }
 
 /* Frosted overlay */
@@ -71,10 +74,20 @@
   inset: 0;
   backdrop-filter: blur(6px);
   opacity: 0.85;
+  pointer-events: none;
 }
 
 /* Chart container */
 .content {
   position: relative;
   padding: 14px;
+
+  /* 👇 Allow chart to fill panel */
+  display: flex;
+  align-items: stretch;
+}
+
+/* Ensure chart expands */
+.content > * {
+  flex: 1;
 }
