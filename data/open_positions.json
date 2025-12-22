@@ -1,1 +1,24 @@
-{}
+{
+  "BTCUSDT": {
+    "active_stop": 86326.02835978837,
+    "entry_price": 88769.63064999999,
+    "entry_time": "2025-12-21",
+    "frame": "Daily",
+    "id": "BTCUSDT-2025-12-21",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BTCUSDT"
+  },
+  "ETHUSDT": {
+    "active_stop": 2888.4143783068785,
+    "entry_price": 3001.575225,
+    "entry_time": "2025-12-21",
+    "frame": "Daily",
+    "id": "ETHUSDT-2025-12-21",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "ETHUSDT"
+  }
+}
