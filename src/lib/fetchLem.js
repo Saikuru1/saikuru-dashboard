@@ -5,7 +5,10 @@ const LEM_CSV_URL =
 
 export async function fetchLemObservations() {
   const res = await fetch(LEM_CSV_URL, { cache: 'no-store' });
-  if (!res.ok) throw new Error('LEM CSV fetch failed: ${res.status}');
+  if (!res.ok) {
+    // ✅ FIX: proper template literal
+    throw new Error(`LEM CSV fetch failed: ${res.status}`);
+  }
   const text = await res.text();
   return parseCsv(text);
 }

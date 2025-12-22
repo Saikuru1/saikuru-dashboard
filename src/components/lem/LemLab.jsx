@@ -13,7 +13,8 @@ export default function LemLab() {
   const [err, setErr] = useState('');
   const [loading, setLoading] = useState(true);
 
-  const [chain, setChain] = useState('BNB');
+  // ✅ FIX: chain value must match CSV ("bsc", not "BNB")
+  const [chain, setChain] = useState('bsc');
   const [pair, setPair] = useState('');
   const [tf, setTf] = useState('7D');
 
@@ -106,8 +107,12 @@ export default function LemLab() {
       <div className={styles.controls}>
         <label className={styles.label}>
           Chain
-          <select className={styles.select} value={chain} onChange={(e) => setChain(e.target.value)}>
-            {(chains.length ? chains : ['BNB']).map(c => (
+          <select
+            className={styles.select}
+            value={chain}
+            onChange={(e) => setChain(e.target.value)}
+          >
+            {(chains.length ? chains : ['bsc']).map(c => (
               <option key={c} value={c}>{c}</option>
             ))}
           </select>
@@ -115,7 +120,11 @@ export default function LemLab() {
 
         <label className={styles.label}>
           Asset (Pair)
-          <select className={styles.select} value={pair} onChange={(e) => setPair(e.target.value)}>
+          <select
+            className={styles.select}
+            value={pair}
+            onChange={(e) => setPair(e.target.value)}
+          >
             {assets.map(a => {
               const title = a.token_symbol || a.token_name
                 ? `${a.token_symbol || '—'} ${a.token_name ? `• ${a.token_name}` : ''}`
@@ -144,9 +153,19 @@ export default function LemLab() {
       </div>
 
       <div className={styles.meta}>
-        <div><span className={styles.metaKey}>Token</span> {pickedMeta.token_symbol || '—'} {pickedMeta.token_name ? `• ${pickedMeta.token_name}` : ''}</div>
-        <div><span className={styles.metaKey}>Pair</span> {pickedMeta.pair_address || '—'}</div>
-        <div><span className={styles.metaKey}>Rows</span> {series.length}</div>
+        <div>
+          <span className={styles.metaKey}>Token</span>
+          {pickedMeta.token_symbol || '—'}
+          {pickedMeta.token_name ? `• ${pickedMeta.token_name}` : ''}
+        </div>
+        <div>
+          <span className={styles.metaKey}>Pair</span>
+          {pickedMeta.pair_address || '—'}
+        </div>
+        <div>
+          <span className={styles.metaKey}>Rows</span>
+          {series.length}
+        </div>
       </div>
 
       {loading && <div className={styles.notice}>Loading canonical CSV…</div>}
