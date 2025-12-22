@@ -27,7 +27,7 @@ function scalePoints(data, width, height, pad, yAccessor) {
     .map(d => {
       const y = yAccessor(d);
       if (typeof d.x !== 'number' || typeof y !== 'number') return null;
-      return `${normX(d.x).toFixed(2)},'${normY(y).toFixed(2)}`;
+      return '${normX(d.x).toFixed(2)},${normY(y).toFixed(2)}';
     })
     .filter(Boolean)
     .join(' ');
@@ -36,7 +36,7 @@ function scalePoints(data, width, height, pad, yAccessor) {
 export default function SimpleLineChart({
   title = '',
   subtitle,
-  data = [],          // ✅ safe default
+  data = [],
   aLabel = 'A',
   bLabel = 'B',
   height = 180,
