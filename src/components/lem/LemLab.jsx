@@ -187,14 +187,6 @@ export default function LemLab() {
             data={chartMcLpn}
             aLabel="Market Cap"
             bLabel="LPₙ"  // "LP native"
-          />
-
-          <SimpleLineChart
-            title="Market Cap vs LPₙ"
-            subtitle="Illusion vs load-bearing capacity"
-            data={chartMcLpn}
-            aLabel="Market Cap"
-            bLabel="LPₙ"  // "LP native"
 
             showAxisA
             showAxisB
