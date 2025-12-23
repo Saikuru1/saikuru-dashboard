@@ -10,17 +10,6 @@
     "stop_type": "310",
     "symbol": "ADAUSDT"
   },
-  "BNBUSDT": {
-    "active_stop": 844.803528042328,
-    "entry_price": 861.9896,
-    "entry_time": "2025-12-22",
-    "frame": "Daily",
-    "id": "BNBUSDT-2025-12-22",
-    "signal_type": "ENTRY",
-    "status": "open",
-    "stop_type": "310",
-    "symbol": "BNBUSDT"
-  },
   "BTCUSDT": {
     "active_stop": 86840.13121693123,
     "entry_price": 88769.63064999999,
