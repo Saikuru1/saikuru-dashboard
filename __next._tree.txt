@@ -1,3 +1,3 @@
 :HL["/saikuru-dashboard/_next/static/chunks/3d9a10b5b0470a2c.css","style"]
 :HL["/saikuru-dashboard/_next/static/chunks/19fe952838c7d4e1.css","style"]
-0:{"buildId":"7zlEleHrmmsp1R6PQhQ8o","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
+0:{"buildId":"jCG-90jPY9DQvmnayvaav","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
