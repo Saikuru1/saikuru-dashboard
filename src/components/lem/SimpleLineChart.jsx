@@ -1,108 +1,101 @@
-
 'use client';
 
 import styles from './SimpleLineChart.module.css';
 
-/**
- * Scale points into a constrained vertical band
- */
-function scalePointsBand(data, width, height, pad, yAccessor, bandTop, bandBottom) {
-  if (!Array.isArray(data) || data.length === 0) return '';
+/* ---------- Utilities ---------- */
 
-  const ys = data.map(yAccessor).filter(v => typeof v === 'number' && isFinite(v));
-  const xs = data.map(d => d.x).filter(v => typeof v === 'number' && isFinite(v));
-  if (!ys.length || !xs.length) return '';
+function scalePoints(data, width, height, pad, domainMin, domainMax, yAccessor) {
+  if (!data.length) return '';
 
-  const minY = Math.min(...ys);
-  const maxY = Math.max(...ys);
-  const minX = Math.min(...xs);
-  const maxX = Math.max(...xs);
+  const minX = Math.min(...data.map(d => d.x));
+  const maxX = Math.max(...data.map(d => d.x));
 
-  const drawableHeight = height * (bandBottom - bandTop);
-  const offsetY = height * bandTop;
+  const w = width - pad * 2;
+  const h = height - pad * 2;
 
-  const normX = (x) =>
-    pad + ((x - minX) / (maxX - minX || 1)) * (width - pad * 2);
+  const nx = x =>
+    pad + ((x - minX) / (maxX - minX || 1)) * w;
 
-  const normY = (y) =>
-    offsetY +
-    (1 - (y - minY) / (maxY - minY || 1)) * drawableHeight;
+  const ny = y =>
+    pad + (1 - (y - domainMin) / (domainMax - domainMin || 1)) * h;
 
   return data
     .map(d => {
       const y = yAccessor(d);
-      if (typeof d.x !== 'number' || typeof y !== 'number') return null;
-      return `${normX(d.x).toFixed(2)},${normY(y).toFixed(2)}`;
+      if (!Number.isFinite(d.x) || !Number.isFinite(y)) return null;
+      return `${nx(d.x)},${ny(y)}`;
     })
     .filter(Boolean)
     .join(' ');
 }
 
-/**
- * Compute numeric ticks
- */
-function computeYAxisTicks(values, count = 5) {
-  if (!values.length) return [];
-  const min = Math.min(...values);
-  const max = Math.max(...values);
+function axisTicks(min, max, count = 5) {
   if (min === max) return [min];
-
   const step = (max - min) / (count - 1);
   return Array.from({ length: count }, (_, i) => min + step * i);
 }
 
+/* ---------- Component ---------- */
+
 export default function SimpleLineChart({
-  title = '',
+  title,
   subtitle,
   data = [],
-  aLabel = 'A', // contextual (Price / LPₙ)
-  bLabel = 'B', // structural (LEM / MC)
-  height = 240, // 🔑 taller by design
+  aLabel,
+  bLabel,
+  height = 240, // 🔑 Taller charts (non-negotiable)
 }) {
-  const width = 680;           // 🔑 narrower for mobile
-  const pad = 12;
-  const axisPad = 44;
+  const width = 720;
+  const pad = 14;
+  const axisPad = 42;
 
-  // Vertical bands
-  const LOW_BAND = [0.55, 0.90];   // contextual lives low
-  const HIGH_BAND = [0.10, 0.45];  // structural lives high
+  const aVals = data.map(d => d.a).filter(Number.isFinite);
+  const bVals = data.map(d => d.b).filter(Number.isFinite);
 
-  const pointsA = scalePointsBand(
+  if (!aVals.length || !bVals.length) return null;
+
+  /* ---------- Vertical Anchoring ---------- */
+
+  // Upper band (Series A)
+  const aMin = Math.min(...aVals);
+  const aMax = Math.max(...aVals);
+  const aDomainMin = aMin + (aMax - aMin) * 0.35;
+  const aDomainMax = aMax + (aMax - aMin) * 0.10;
+
+  // Lower band (Series B)
+  const bMin = Math.min(...bVals);
+  const bMax = Math.max(...bVals);
+  const bDomainMin = bMin - (bMax - bMin) * 0.10;
+  const bDomainMax = bMin + (bMax - bMin) * 0.65;
+
+  const pointsA = scalePoints(
     data,
     width - axisPad,
     height,
     pad,
-    d => d.a,
-    LOW_BAND[0],
-    LOW_BAND[1]
+    aDomainMin,
+    aDomainMax,
+    d => d.a
   );
 
-  const pointsB = scalePointsBand(
+  const pointsB = scalePoints(
     data,
     width - axisPad,
     height,
     pad,
-    d => d.b,
-    HIGH_BAND[0],
-    HIGH_BAND[1]
+    bDomainMin,
+    bDomainMax,
+    d => d.b
   );
 
-  // Numeric axis (right side = structural)
-  const bValues = data.map(d => d.b).filter(v => typeof v === 'number');
-  const ticks = computeYAxisTicks(bValues, 5);
-  const minB = Math.min(...bValues);
-  const maxB = Math.max(...bValues);
-
-  const scaleYStructural = (v) =>
-    height * HIGH_BAND[0] +
-    (1 - (v - minB) / (maxB - minB || 1)) *
-      height * (HIGH_BAND[1] - HIGH_BAND[0]);
+  const aTicks = axisTicks(aDomainMin, aDomainMax);
+  const bTicks = axisTicks(bDomainMin, bDomainMax);
 
   return (
     <div className={styles.chart}>
       <div className={styles.head}>
         <div>
-          {title && <div className={styles.title}>{title}</div>}
+          <div className={styles.title}>{title}</div>
           {subtitle && <div className={styles.sub}>{subtitle}</div>}
         </div>
 
@@ -113,46 +106,78 @@ export default function SimpleLineChart({
       </div>
 
       <div className={styles.frame}>
-        <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={title}>
-          {/* Contextual (Price / LPₙ) — LOW */}
-          {pointsA && (
-            <polyline
-              className={styles.lineA}
-              fill="none"
-              points={pointsA}
-            />
-          )}
+        <svg viewBox={`0 0 ${width} ${height}`}>
 
-          {/* Structural (LEM / Market Cap) — HIGH */}
-          {pointsB && (
-            <polyline
-              className={styles.lineB}
-              fill="none"
-              points={pointsB}
-            />
-          )}
+          {/* -------- LEFT AXIS (Series A) -------- */}
+          {aTicks.map((v, i) => {
+            const y =
+              pad + (1 - (v - aDomainMin) / (aDomainMax - aDomainMin)) *
+              (height - pad * 2);
+            return (
+              <g key={`a-${i}`}>
+                <line
+                  x1={pad - 4}
+                  x2={pad}
+                  y1={y}
+                  y2={y}
+                  stroke="rgba(255,255,255,0.25)"
+                />
+                <text
+                  x={pad - 6}
+                  y={y + 4}
+                  textAnchor="end"
+                  fontSize="10"
+                  fill="rgba(255,255,255,0.55)"
+                >
+                  {v.toFixed(1)}
+                </text>
+              </g>
+            );
+          })}
 
-          {/* Right-side structural axis */}
-          {ticks.map((v, i) => (
-            <g key={i}>
-              <line
-                x1={width - axisPad}
-                x2={width - axisPad + 6}
-                y1={scaleYStructural(v)}
-                y2={scaleYStructural(v)}
-                stroke="rgba(255,255,255,0.25)"
-              />
-              <text
-                x={width - 2}
-                y={scaleYStructural(v) + 4}
-                textAnchor="end"
-                fontSize="10"
-                fill="rgba(255,255,255,0.55)"
-              >
-                {v.toFixed(1)}
-              </text>
-            </g>
-          ))}
+          {/* -------- RIGHT AXIS (Series B) -------- */}
+          {bTicks.map((v, i) => {
+            const y =
+              pad + (1 - (v - bDomainMin) / (bDomainMax - bDomainMin)) *
+              (height - pad * 2);
+            return (
+              <g key={`b-${i}`}>
+                <line
+                  x1={width - axisPad}
+                  x2={width - axisPad + 6}
+                  y1={y}
+                  y2={y}
+                  stroke="rgba(255,255,255,0.25)"
+                />
+                <text
+                  x={width - 2}
+                  y={y + 4}
+                  textAnchor="end"
+                  fontSize="10"
+                  fill="rgba(255,255,255,0.55)"
+                >
+                  {v.toFixed(1)}
+                </text>
+              </g>
+            );
+          })}
+
+          {/* -------- SERIES -------- */}
+
+          {/* Series A = Contextual (Purple, Upper) */}
+          <polyline
+            className={styles.lineA}
+            fill="none"
+            points={pointsA}
+          />
+
+          {/* Series B = Structural (Gold, Lower) */}
+          <polyline
+            className={styles.lineB}
+            fill="none"
+            points={pointsB}
+          />
+
         </svg>
       </div>
     </div>
