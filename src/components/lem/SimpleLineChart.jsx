@@ -2,40 +2,70 @@
 
 import styles from './SimpleLineChart.module.css';
 
-/* ---------- Utilities ---------- */
+const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
-function scalePoints(data, width, height, pad, domainMin, domainMax, yAccessor) {
+function scaleSeries({
+  data,
+  width,
+  height,
+  padTop,
+  padBottom,
+  padX,
+  accessor,
+  band = 'full', // 'top' | 'bottom' | 'full'
+}) {
   if (!data.length) return '';
 
-  const minX = Math.min(...data.map(d => d.x));
-  const maxX = Math.max(...data.map(d => d.x));
+  const values = data.map(accessor).filter(v => Number.isFinite(v));
+  const xs = data.map(d => d.x).filter(v => Number.isFinite(v));
+  if (!values.length || !xs.length) return '';
 
-  const w = width - pad * 2;
-  const h = height - pad * 2;
+  const minV = Math.min(...values);
+  const maxV = Math.max(...values);
+  const minX = Math.min(...xs);
+  const maxX = Math.max(...xs);
 
-  const nx = x =>
-    pad + ((x - minX) / (maxX - minX || 1)) * w;
+  const innerTop = padTop;
+  const innerBottom = height - padBottom;
+  const innerHeight = innerBottom - innerTop;
 
-  const ny = y =>
-    pad + (1 - (y - domainMin) / (domainMax - domainMin || 1)) * h;
+  // Vertical band allocation
+  let bandTop = innerTop;
+  let bandBottom = innerBottom;
+
+  if (band === 'top') {
+    bandBottom = innerTop + innerHeight * 0.4;
+  } else if (band === 'bottom') {
+    bandTop = innerTop + innerHeight * 0.6;
+  }
+
+  const normX = x =>
+    padX + ((x - minX) / (maxX - minX || 1)) * (width - padX * 2);
+
+  const normY = v => {
+    const t = (v - minV) / (maxV - minV || 1);
+    const y = bandBottom - t * (bandBottom - bandTop);
+    return clamp(y, bandTop, bandBottom);
+  };
 
   return data
     .map(d => {
-      const y = yAccessor(d);
-      if (!Number.isFinite(d.x) || !Number.isFinite(y)) return null;
-      return `${nx(d.x)},${ny(y)}`;
+      const v = accessor(d);
+      if (!Number.isFinite(d.x) || !Number.isFinite(v)) return null;
+      return `${normX(d.x).toFixed(2)},${normY(v).toFixed(2)}`;
     })
     .filter(Boolean)
     .join(' ');
 }
 
-function axisTicks(min, max, count = 5) {
+function axisTicks(values, count = 5) {
+  if (!values.length) return [];
+  const min = Math.min(...values);
+  const max = Math.max(...values);
   if (min === max) return [min];
   const step = (max - min) / (count - 1);
   return Array.from({ length: count }, (_, i) => min + step * i);
 }
-
-/* ---------- Component ---------- */
 
 export default function SimpleLineChart({
   title,
@@ -43,53 +73,57 @@ export default function SimpleLineChart({
   data = [],
   aLabel,
   bLabel,
-  height = 240, // 🔑 Taller charts (non-negotiable)
+  height = 240, // taller by design (lab rule)
 }) {
-  const width = 720;
-  const pad = 14;
-  const axisPad = 42;
+  const width = 100; // logical units, responsive via viewBox
 
-  const aVals = data.map(d => d.a).filter(Number.isFinite);
-  const bVals = data.map(d => d.b).filter(Number.isFinite);
+  const padX = 10;
+  const padTop = 12;
+  const padBottom = 18;
+  const axisPad = 14;
 
-  if (!aVals.length || !bVals.length) return null;
+  const aValues = data.map(d => d.a).filter(Number.isFinite);
+  const bValues = data.map(d => d.b).filter(Number.isFinite);
 
-  /* ---------- Vertical Anchoring ---------- */
+  const aTicks = axisTicks(aValues);
+  const bTicks = axisTicks(bValues);
 
-  // Upper band (Series A)
-  const aMin = Math.min(...aVals);
-  const aMax = Math.max(...aVals);
-  const aDomainMin = aMin + (aMax - aMin) * 0.35;
-  const aDomainMax = aMax + (aMax - aMin) * 0.10;
+  const minA = Math.min(...aValues);
+  const maxA = Math.max(...aValues);
+  const minB = Math.min(...bValues);
+  const maxB = Math.max(...bValues);
 
-  // Lower band (Series B)
-  const bMin = Math.min(...bVals);
-  const bMax = Math.max(...bVals);
-  const bDomainMin = bMin - (bMax - bMin) * 0.10;
-  const bDomainMax = bMin + (bMax - bMin) * 0.65;
+  const scaleLeftY = v => {
+    const t = (v - minA) / (maxA - minA || 1);
+    return padTop + (1 - t) * (height - padTop - padBottom);
+  };
 
-  const pointsA = scalePoints(
+  const scaleRightY = v => {
+    const t = (v - minB) / (maxB - minB || 1);
+    return padTop + (1 - t) * (height - padTop - padBottom);
+  };
+
+  const pointsA = scaleSeries({
     data,
-    width - axisPad,
+    width,
     height,
-    pad,
-    aDomainMin,
-    aDomainMax,
-    d => d.a
-  );
+    padTop,
+    padBottom,
+    padX,
+    accessor: d => d.a,
+    band: 'bottom', // Price / LPₙ
+  });
 
-  const pointsB = scalePoints(
+  const pointsB = scaleSeries({
     data,
-    width - axisPad,
+    width,
     height,
-    pad,
-    bDomainMin,
-    bDomainMax,
-    d => d.b
-  );
-
-  const aTicks = axisTicks(aDomainMin, aDomainMax);
-  const bTicks = axisTicks(bDomainMin, bDomainMax);
+    padTop,
+    padBottom,
+    padX,
+    accessor: d => d.b,
+    band: 'top', // LEM / Market Cap
+  });
 
   return (
     <div className={styles.chart}>
@@ -98,7 +132,6 @@ export default function SimpleLineChart({
           <div className={styles.title}>{title}</div>
           {subtitle && <div className={styles.sub}>{subtitle}</div>}
         </div>
-
         <div className={styles.legend}>
           <span className={styles.keyA}>{aLabel}</span>
           <span className={styles.keyB}>{bLabel}</span>
@@ -106,78 +139,56 @@ export default function SimpleLineChart({
       </div>
 
       <div className={styles.frame}>
-        <svg viewBox={`0 0 ${width} ${height}`}>
+        <svg
+          viewBox={`0 0 ${width} ${height}`}
+          preserveAspectRatio="none"
+          width="100%"
+          height={height}
+        >
+          {/* Left Y-axis */}
+          {aTicks.map((v, i) => (
+            <text
+              key={i}
+              x={2}
+              y={scaleLeftY(v) + 3}
+              fontSize="3"
+              fill="rgba(255,255,255,0.45)"
+            >
+              {v.toFixed(1)}
+            </text>
+          ))}
 
-          {/* -------- LEFT AXIS (Series A) -------- */}
-          {aTicks.map((v, i) => {
-            const y =
-              pad + (1 - (v - aDomainMin) / (aDomainMax - aDomainMin)) *
-              (height - pad * 2);
-            return (
-              <g key={`a-${i}`}>
-                <line
-                  x1={pad - 4}
-                  x2={pad}
-                  y1={y}
-                  y2={y}
-                  stroke="rgba(255,255,255,0.25)"
-                />
-                <text
-                  x={pad - 6}
-                  y={y + 4}
-                  textAnchor="end"
-                  fontSize="10"
-                  fill="rgba(255,255,255,0.55)"
-                >
-                  {v.toFixed(1)}
-                </text>
-              </g>
-            );
-          })}
+          {/* Right Y-axis */}
+          {bTicks.map((v, i) => (
+            <text
+              key={i}
+              x={width - 2}
+              y={scaleRightY(v) + 3}
+              textAnchor="end"
+              fontSize="3"
+              fill="rgba(255,255,255,0.55)"
+            >
+              {v.toFixed(1)}
+            </text>
+          ))}
 
-          {/* -------- RIGHT AXIS (Series B) -------- */}
-          {bTicks.map((v, i) => {
-            const y =
-              pad + (1 - (v - bDomainMin) / (bDomainMax - bDomainMin)) *
-              (height - pad * 2);
-            return (
-              <g key={`b-${i}`}>
-                <line
-                  x1={width - axisPad}
-                  x2={width - axisPad + 6}
-                  y1={y}
-                  y2={y}
-                  stroke="rgba(255,255,255,0.25)"
-                />
-                <text
-                  x={width - 2}
-                  y={y + 4}
-                  textAnchor="end"
-                  fontSize="10"
-                  fill="rgba(255,255,255,0.55)"
-                >
-                  {v.toFixed(1)}
-                </text>
-              </g>
-            );
-          })}
+          {/* Lower series */}
+          {pointsA && (
+            <polyline
+              className={styles.lineA}
+              fill="none"
+              points={pointsA}
+            />
+          )}
 
-          {/* -------- SERIES -------- */}
-
-          {/* Series A = Contextual (Purple, Upper) */}
-          <polyline
-            className={styles.lineA}
-            fill="none"
-            points={pointsA}
-          />
-
-          {/* Series B = Structural (Gold, Lower) */}
-          <polyline
-            className={styles.lineB}
-            fill="none"
-            points={pointsB}
-          />
-
+          {/* Upper series */}
+          {pointsB && (
+            <polyline
+              className={styles.lineB}
+              fill="none"
+              points={pointsB}
+            />
+          )}
         </svg>
       </div>
     </div>
