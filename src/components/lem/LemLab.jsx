@@ -5,6 +5,7 @@ import styles from './LemLab.module.css';
 import { fetchLemObservations } from '@lib/fetchLem';
 import { toNum } from '@lib/csv';
 import SimpleLineChart from './SimpleLineChart';
+import { getAssetLabels } from '@lib/getAssetLabels'; // ✅ NEW
 
 const TF = ['1D', '7D', '30D', 'ALL'];
 
@@ -13,11 +14,17 @@ export default function LemLab() {
   const [err, setErr] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // ✅ FIX: chain value must match CSV ("bsc", not "BNB")
+  // CSV chain values (canonical)
   const [chain, setChain] = useState('bsc');
   const [pair, setPair] = useState('');
   const [tf, setTf] = useState('7D');
 
+  // ✅ Asset metadata cache (address → { name, symbol, chain })
+  const [assetMeta, setAssetMeta] = useState({});
+
+  /* ──────────────────────────────────────────────
+     Load canonical CSV
+  ────────────────────────────────────────────── */
   useEffect(() => {
     let cancelled = false;
 
@@ -39,32 +46,77 @@ export default function LemLab() {
     return () => { cancelled = true; };
   }, []);
 
+  /* ──────────────────────────────────────────────
+     Available chains (from CSV)
+  ────────────────────────────────────────────── */
   const chains = useMemo(() => {
     const s = new Set(rows.map(r => (r.chain || '').trim()).filter(Boolean));
     return Array.from(s);
   }, [rows]);
 
+  /* ──────────────────────────────────────────────
+     Assets (pair addresses per chain)
+  ────────────────────────────────────────────── */
   const assets = useMemo(() => {
     const filtered = rows.filter(r => (r.chain || '').trim() === chain);
     const m = new Map();
+
     for (const r of filtered) {
       const addr = (r.pair_address || '').trim();
       if (!addr) continue;
+
       if (!m.has(addr)) {
-        m.set(addr, {
-          pair_address: addr,
-          token_symbol: (r.token_symbol || '').trim(),
-          token_name: (r.token_name || '').trim(),
-        });
+        m.set(addr, { pair_address: addr });
       }
     }
+
     return Array.from(m.values());
   }, [rows, chain]);
 
+  /* ──────────────────────────────────────────────
+     Default selected pair
+  ────────────────────────────────────────────── */
   useEffect(() => {
-    if (!pair && assets.length) setPair(assets[0].pair_address);
+    if (!pair && assets.length) {
+      setPair(assets[0].pair_address);
+    }
   }, [assets, pair]);
 
+  /* ──────────────────────────────────────────────
+     🔬 Enrich asset labels (GeckoTerminal)
+     CSV remains untouched — UI convenience only
+  ────────────────────────────────────────────── */
+  useEffect(() => {
+    let cancelled = false;
+
+    async function enrich() {
+      const entries = await Promise.all(
+        assets.map(async (a) => {
+          try {
+            const meta = await getAssetLabels(chain, a.pair_address);
+            return [a.pair_address, meta];
+          } catch {
+            return [
+              a.pair_address,
+              { name: a.pair_address, symbol: '—', chain }
+            ];
+          }
+        })
+      );
+
+      if (!cancelled) {
+        setAssetMeta(Object.fromEntries(entries));
+      }
+    }
+
+    if (assets.length) enrich();
+
+    return () => { cancelled = true; };
+  }, [assets, chain]);
+
+  /* ──────────────────────────────────────────────
+     Time-series selection
+  ────────────────────────────────────────────── */
   const series = useMemo(() => {
     const filtered = rows
       .filter(r => (r.chain || '').trim() === chain)
@@ -86,6 +138,9 @@ export default function LemLab() {
     return filtered.filter(d => d.ts >= cutoff);
   }, [rows, chain, pair, tf]);
 
+  /* ──────────────────────────────────────────────
+     Chart data
+  ────────────────────────────────────────────── */
   const chartPriceLem = useMemo(
     () => series.map(d => ({ x: d.ts, a: d.price, b: d.lem })),
     [series]
@@ -96,14 +151,13 @@ export default function LemLab() {
     [series]
   );
 
-  const pickedMeta = useMemo(() => {
-    const found = assets.find(a => a.pair_address === pair);
-    return found || { pair_address: pair, token_symbol: '', token_name: '' };
-  }, [assets, pair]);
+  const pickedMeta = assetMeta[pair] || {};
 
+  /* ──────────────────────────────────────────────
+     Render
+  ────────────────────────────────────────────── */
   return (
     <div className={styles.wrap}>
-
       <div className={styles.controls}>
         <label className={styles.label}>
           Chain
@@ -126,12 +180,14 @@ export default function LemLab() {
             onChange={(e) => setPair(e.target.value)}
           >
             {assets.map(a => {
-              const title = a.token_symbol || a.token_name
-                ? `${a.token_symbol || '—'} ${a.token_name ? `• ${a.token_name}` : ''}`
+              const meta = assetMeta[a.pair_address];
+              const label = meta
+                ? `${meta.symbol} • ${meta.name} (${meta.chain})`
                 : a.pair_address.slice(0, 10) + '…';
+
               return (
                 <option key={a.pair_address} value={a.pair_address}>
-                  {title}
+                  {label}
                 </option>
               );
             })}
@@ -155,12 +211,12 @@ export default function LemLab() {
       <div className={styles.meta}>
         <div>
           <span className={styles.metaKey}>Token</span>
-          {pickedMeta.token_symbol || '—'}
-          {pickedMeta.token_name ? `• ${pickedMeta.token_name}` : ''}
+          {pickedMeta.symbol || '—'}
+          {pickedMeta.name ? `• ${pickedMeta.name}` : ''}
         </div>
         <div>
           <span className={styles.metaKey}>Pair</span>
-          {pickedMeta.pair_address || '—'}
+          {pair || '—'}
         </div>
         <div>
           <span className={styles.metaKey}>Rows</span>
@@ -186,8 +242,7 @@ export default function LemLab() {
             subtitle="Illusion vs load-bearing capacity"
             data={chartMcLpn}
             aLabel="Market Cap"
-            bLabel="LPₙ"  // "LP native"
-
+            bLabel="LPₙ"
             showAxisA
             showAxisB
             axisAFormatter={v => `$${(v / 1e6).toFixed(1)}M`}
