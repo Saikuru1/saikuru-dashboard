@@ -2,15 +2,14 @@
 
 import styles from './SimpleLineChart.module.css';
 
-function scalePoints(data, width, height, pad, yAccessor) {
+/* ---------- helpers ---------- */
+
+function scalePoints(data, width, height, pad, yAccessor, minY, maxY) {
   if (!Array.isArray(data) || data.length === 0) return '';
 
-  const ys = data.map(yAccessor).filter(v => typeof v === 'number' && isFinite(v));
   const xs = data.map(d => d.x).filter(v => typeof v === 'number' && isFinite(v));
-  if (!ys.length || !xs.length) return '';
+  if (!xs.length) return '';
 
-  const minY = Math.min(...ys);
-  const maxY = Math.max(...ys);
   const minX = Math.min(...xs);
   const maxX = Math.max(...xs);
 
@@ -35,14 +34,14 @@ function scalePoints(data, width, height, pad, yAccessor) {
 
 function computeYAxisTicks(values, count = 5) {
   if (!values.length) return [];
-
   const min = Math.min(...values);
   const max = Math.max(...values);
   if (min === max) return [min];
-
   const step = (max - min) / (count - 1);
   return Array.from({ length: count }, (_, i) => min + step * i);
 }
+
+/* ---------- component ---------- */
 
 export default function SimpleLineChart({
   title = '',
@@ -54,19 +53,41 @@ export default function SimpleLineChart({
 }) {
   const width = 720;
   const pad = 12;
-  const axisPad = 36; // space for right-side axis
+  const axisPad = 40;
 
-  const pointsA = scalePoints(data, width - axisPad, height, pad, d => d.a);
-  const pointsB = scalePoints(data, width - axisPad, height, pad, d => d.b);
-
+  const aValues = data.map(d => d.a).filter(v => typeof v === 'number');
   const bValues = data.map(d => d.b).filter(v => typeof v === 'number');
-  const ticks = computeYAxisTicks(bValues, 5);
 
+  const minA = Math.min(...aValues);
+  const maxA = Math.max(...aValues);
   const minB = Math.min(...bValues);
   const maxB = Math.max(...bValues);
 
-  const scaleY = (v) =>
-    pad + (1 - (v - minB) / (maxB - minB || 1)) * (height - pad * 2);
+  const pointsA = scalePoints(
+    data,
+    width - axisPad,
+    height,
+    pad,
+    d => d.a,
+    minA,
+    maxA
+  );
+
+  const pointsB = scalePoints(
+    data,
+    width - axisPad,
+    height,
+    pad,
+    d => d.b,
+    minB,
+    maxB
+  );
+
+  const ticksA = computeYAxisTicks(aValues, 4);
+  const ticksB = computeYAxisTicks(bValues, 5);
+
+  const scaleY = (v, min, max) =>
+    pad + (1 - (v - min) / (max - min || 1)) * (height - pad * 2);
 
   return (
     <div className={styles.chart}>
@@ -83,12 +104,9 @@ export default function SimpleLineChart({
       </div>
 
       <div className={styles.frame}>
-        <svg
-          viewBox={`0 0 ${width} ${height}`}
-          role="img"
-          aria-label={title}
-        >
-          {/* Series A (contextual) */}
+        <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={title}>
+
+          {/* Series A — contextual (left axis) */}
           {pointsA && (
             <polyline
               className={styles.lineA}
@@ -97,7 +115,7 @@ export default function SimpleLineChart({
             />
           )}
 
-          {/* Series B (structural / LEM) */}
+          {/* Series B — structural (right axis) */}
           {pointsB && (
             <polyline
               className={styles.lineB}
@@ -106,22 +124,44 @@ export default function SimpleLineChart({
             />
           )}
 
-          {/* Right-side Y-axis ticks for B (LEM) */}
-          {ticks.map((v, i) => (
-            <g key={i}>
+          {/* LEFT Y-axis (Series A) */}
+          {ticksA.map((v, i) => (
+            <g key={`a-${i}`}>
+              <line
+                x1={pad - 6}
+                x2={pad}
+                y1={scaleY(v, minA, maxA)}
+                y2={scaleY(v, minA, maxA)}
+                stroke="rgba(255,255,255,0.18)"
+              />
+              <text
+                x={pad - 8}
+                y={scaleY(v, minA, maxA) + 4}
+                textAnchor="end"
+                fontSize="10"
+                fill="rgba(255,255,255,0.45)"
+              >
+                {v.toFixed(0)}
+              </text>
+            </g>
+          ))}
+
+          {/* RIGHT Y-axis (Series B / LEM / LPₙ) */}
+          {ticksB.map((v, i) => (
+            <g key={`b-${i}`}>
               <line
                 x1={width - axisPad}
                 x2={width - axisPad + 6}
-                y1={scaleY(v)}
-                y2={scaleY(v)}
-                stroke="rgba(255,255,255,0.25)"
+                y1={scaleY(v, minB, maxB)}
+                y2={scaleY(v, minB, maxB)}
+                stroke="rgba(255,255,255,0.28)"
               />
               <text
-                x={width - 2}
-                y={scaleY(v) + 4}
+                x={width - 4}
+                y={scaleY(v, minB, maxB) + 4}
                 textAnchor="end"
                 fontSize="10"
-                fill="rgba(255,255,255,0.55)"
+                fill="rgba(255,255,255,0.65)"
               >
                 {v.toFixed(1)}
               </text>

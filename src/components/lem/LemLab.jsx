@@ -183,10 +183,23 @@ export default function LemLab() {
 
           <SimpleLineChart
             title="Market Cap vs LPₙ"
-            subtitle="Dual lines (scaled independently)"
+            subtitle="Illusion vs load-bearing capacity"
             data={chartMcLpn}
             aLabel="Market Cap"
-            bLabel="LPₙ"
+            bLabel="LPₙ"  // "LP native"
+          />
+
+          <SimpleLineChart
+            title="Market Cap vs LPₙ"
+            subtitle="Illusion vs load-bearing capacity"
+            data={chartMcLpn}
+            aLabel="Market Cap"
+            bLabel="LPₙ"  // "LP native"
+
+            showAxisA
+            showAxisB
+            axisAFormatter={v => `$${(v / 1e6).toFixed(1)}M`}
+            axisBFormatter={v => `$${(v / 1e3).toFixed(0)}k`}
           />
         </div>
       )}
