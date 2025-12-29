@@ -1,1 +1,35 @@
-{}
+{
+  "ADAUSDT": {
+    "active_stop": 0.357348,
+    "entry_price": 0.37142624999999996,
+    "entry_time": "2025-12-28",
+    "frame": "Daily",
+    "id": "ADAUSDT-2025-12-28",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "ADAUSDT"
+  },
+  "BCHUSDT": {
+    "active_stop": 583.5834656084655,
+    "entry_price": 635.5849999999999,
+    "entry_time": "2025-12-28",
+    "frame": "Daily",
+    "id": "BCHUSDT-2025-12-28",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BCHUSDT"
+  },
+  "BNBUSDT": {
+    "active_stop": 840.3780843253969,
+    "entry_price": 848.826775,
+    "entry_time": "2025-12-28",
+    "frame": "Daily",
+    "id": "BNBUSDT-2025-12-28",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BNBUSDT"
+  }
+}
