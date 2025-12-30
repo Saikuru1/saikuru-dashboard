@@ -1,6 +1,6 @@
 {
   "BCHUSDT": {
-    "active_stop": 583.5834656084655,
+    "active_stop": 588.63373015873,
     "entry_price": 635.5849999999999,
     "entry_time": "2025-12-28",
     "frame": "Daily",
@@ -11,7 +11,7 @@
     "symbol": "BCHUSDT"
   },
   "BNBUSDT": {
-    "active_stop": 840.3780843253969,
+    "active_stop": 845.2803653439154,
     "entry_price": 848.826775,
     "entry_time": "2025-12-28",
     "frame": "Daily",
