@@ -1,6 +1,6 @@
 {
   "ADAUSDT": {
-    "active_stop": 0.34708689814814814,
+    "active_stop": 0.36077338624338623,
     "entry_price": 0.36200275,
     "entry_time": "2026-01-02",
     "frame": "Daily",
@@ -11,7 +11,7 @@
     "symbol": "ADAUSDT"
   },
   "BNBUSDT": {
-    "active_stop": 864.8920592592592,
+    "active_stop": 869.7966427248676,
     "entry_price": 848.826775,
     "entry_time": "2025-12-28",
     "frame": "Daily",
@@ -22,7 +22,7 @@
     "symbol": "BNBUSDT"
   },
   "DOGEUSDT": {
-    "active_stop": 0.12035192751322753,
+    "active_stop": 0.12316385502645504,
     "entry_price": 0.12761825,
     "entry_time": "2026-01-02",
     "frame": "Daily",
