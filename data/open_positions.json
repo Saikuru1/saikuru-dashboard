@@ -1,15 +1,4 @@
 {
-  "BNBUSDT": {
-    "active_stop": 889.4168710317459,
-    "entry_price": 848.826775,
-    "entry_time": "2025-12-28",
-    "frame": "Daily",
-    "id": "BNBUSDT-2025-12-28",
-    "signal_type": "ENTRY",
-    "status": "open",
-    "stop_type": "310",
-    "symbol": "BNBUSDT"
-  },
   "DOGEUSDT": {
     "active_stop": 0.13446393677248678,
     "entry_price": 0.12761825,
