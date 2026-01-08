@@ -1,6 +1,6 @@
 {
   "BNBUSDT": {
-    "active_stop": 884.5046874999999,
+    "active_stop": 889.4168710317459,
     "entry_price": 848.826775,
     "entry_time": "2025-12-28",
     "frame": "Daily",
@@ -11,7 +11,7 @@
     "symbol": "BNBUSDT"
   },
   "DOGEUSDT": {
-    "active_stop": 0.13163535952380953,
+    "active_stop": 0.13446393677248678,
     "entry_price": 0.12761825,
     "entry_time": "2026-01-02",
     "frame": "Daily",
