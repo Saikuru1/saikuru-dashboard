@@ -1,1 +1,24 @@
-{}
+{
+  "BTCUSDT": {
+    "active_stop": 63687.40195767196,
+    "entry_price": 72083.76,
+    "entry_time": "2026-02-08",
+    "frame": "Daily",
+    "id": "BTCUSDT-2026-02-08",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BTCUSDT"
+  },
+  "ETHUSDT": {
+    "active_stop": 1895.2741137566136,
+    "entry_price": 2123.35515,
+    "entry_time": "2026-02-08",
+    "frame": "Daily",
+    "id": "ETHUSDT-2026-02-08",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "ETHUSDT"
+  }
+}
