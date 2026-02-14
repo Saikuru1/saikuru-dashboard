@@ -1,6 +1,17 @@
 {
+  "BCHUSDT": {
+    "active_stop": 506.4,
+    "entry_price": 543.9565,
+    "entry_time": "2026-02-13",
+    "frame": "Daily",
+    "id": "BCHUSDT-2026-02-13",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BCHUSDT"
+  },
   "BTCUSDT": {
-    "active_stop": 65555.11924603175,
+    "active_stop": 66022.01744708995,
     "entry_price": 72083.76,
     "entry_time": "2026-02-08",
     "frame": "Daily",
