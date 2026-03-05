@@ -1,1 +1,24 @@
-{}
+{
+  "BCHUSDT": {
+    "active_stop": 449.0377248677249,
+    "entry_price": 455.937,
+    "entry_time": "2026-03-04",
+    "frame": "Daily",
+    "id": "BCHUSDT-2026-03-04",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BCHUSDT"
+  },
+  "BNBUSDT": {
+    "active_stop": 633.3711068121693,
+    "entry_price": 653.28915,
+    "entry_time": "2026-03-04",
+    "frame": "Daily",
+    "id": "BNBUSDT-2026-03-04",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BNBUSDT"
+  }
+}
