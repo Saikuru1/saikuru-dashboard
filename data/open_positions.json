@@ -1,6 +1,6 @@
 {
   "ADAUSDT": {
-    "active_stop": 0.262094,
+    "active_stop": 0.282173,
     "entry_price": 0.26756725000000003,
     "entry_time": "2026-03-13",
     "frame": "Daily",
@@ -11,7 +11,7 @@
     "symbol": "ADAUSDT"
   },
   "DOGEUSDT": {
-    "active_stop": 0.0943616,
+    "active_stop": 0.1002398,
     "entry_price": 0.10074122499999999,
     "entry_time": "2026-03-13",
     "frame": "Daily",
