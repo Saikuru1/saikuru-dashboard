@@ -1,13 +1,1 @@
-{
-  "DOGEUSDT": {
-    "active_stop": 0.08935639999999999,
-    "entry_price": 0.09301195,
-    "entry_time": "2026-04-01",
-    "frame": "Daily",
-    "id": "DOGEUSDT-2026-04-01",
-    "signal_type": "ENTRY",
-    "status": "open",
-    "stop_type": "310",
-    "symbol": "DOGEUSDT"
-  }
-}
+{}
