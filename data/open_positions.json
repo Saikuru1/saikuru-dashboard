@@ -9,16 +9,5 @@
     "status": "open",
     "stop_type": "310",
     "symbol": "ADAUSDT"
-  },
-  "BNBUSDT": {
-    "active_stop": 597.3631121031748,
-    "entry_price": 605.239325,
-    "entry_time": "2026-04-06",
-    "frame": "Daily",
-    "id": "BNBUSDT-2026-04-06",
-    "signal_type": "ENTRY",
-    "status": "open",
-    "stop_type": "310",
-    "symbol": "BNBUSDT"
   }
 }
