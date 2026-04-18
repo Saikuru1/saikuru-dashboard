@@ -1,6 +1,17 @@
 {
+  "ADAUSDT": {
+    "active_stop": 0.24996899999999997,
+    "entry_price": 0.26175275,
+    "entry_time": "2026-04-17",
+    "frame": "Daily",
+    "id": "ADAUSDT-2026-04-17",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "ADAUSDT"
+  },
   "BCHUSDT": {
-    "active_stop": 435.21251984126985,
+    "active_stop": 440.28779761904764,
     "entry_price": 445.10999999999996,
     "entry_time": "2026-04-15",
     "frame": "Daily",
