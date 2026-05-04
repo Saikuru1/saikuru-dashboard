@@ -1,4 +1,15 @@
 {
+  "BTCUSDT": {
+    "active_stop": 77266.61450396825,
+    "entry_price": 79341.2585,
+    "entry_time": "2026-05-03",
+    "frame": "Daily",
+    "id": "BTCUSDT-2026-05-03",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BTCUSDT"
+  },
   "DOGEUSDT": {
     "active_stop": 0.1052159,
     "entry_price": 0.09973872499999999,
@@ -9,5 +20,16 @@
     "status": "open",
     "stop_type": "310",
     "symbol": "DOGEUSDT"
+  },
+  "ETHUSDT": {
+    "active_stop": 2253.2712,
+    "entry_price": 2347.3437249999997,
+    "entry_time": "2026-05-03",
+    "frame": "Daily",
+    "id": "ETHUSDT-2026-05-03",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "ETHUSDT"
   }
 }
