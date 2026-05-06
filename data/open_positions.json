@@ -1,6 +1,6 @@
 {
   "ADAUSDT": {
-    "active_stop": 0.24269399999999997,
+    "active_stop": 0.253849,
     "entry_price": 0.25293075000000004,
     "entry_time": "2026-05-04",
     "frame": "Daily",
@@ -11,7 +11,7 @@
     "symbol": "ADAUSDT"
   },
   "BTCUSDT": {
-    "active_stop": 77758.90642857143,
+    "active_stop": 78249.92716931217,
     "entry_price": 79341.2585,
     "entry_time": "2026-05-03",
     "frame": "Daily",
@@ -22,7 +22,7 @@
     "symbol": "BTCUSDT"
   },
   "DOGEUSDT": {
-    "active_stop": 0.1069231,
+    "active_stop": 0.1115209,
     "entry_price": 0.09973872499999999,
     "entry_time": "2026-04-26",
     "frame": "Daily",
@@ -33,7 +33,7 @@
     "symbol": "DOGEUSDT"
   },
   "ETHUSDT": {
-    "active_stop": 2276.3863,
+    "active_stop": 2290.7035,
     "entry_price": 2347.3437249999997,
     "entry_time": "2026-05-03",
     "frame": "Daily",
