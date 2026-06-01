@@ -1,1 +1,13 @@
-{}
+{
+  "BNBUSDT": {
+    "active_stop": 647.5713125,
+    "entry_price": 730.6621,
+    "entry_time": "2026-05-31",
+    "frame": "Daily",
+    "id": "BNBUSDT-2026-05-31",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BNBUSDT"
+  }
+}
