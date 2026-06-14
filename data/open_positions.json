@@ -1,6 +1,17 @@
 {
+  "ADAUSDT": {
+    "active_stop": 0.1662677,
+    "entry_price": 0.17486607499999998,
+    "entry_time": "2026-06-13",
+    "frame": "Daily",
+    "id": "ADAUSDT-2026-06-13",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "ADAUSDT"
+  },
   "BNBUSDT": {
-    "active_stop": 591.2240323412698,
+    "active_stop": 596.0256542989417,
     "entry_price": 611.8357749999999,
     "entry_time": "2026-06-12",
     "frame": "Daily",
@@ -11,7 +22,7 @@
     "symbol": "BNBUSDT"
   },
   "BTCUSDT": {
-    "active_stop": 61985.41977513228,
+    "active_stop": 62452.91826719577,
     "entry_price": 64371.01622499999,
     "entry_time": "2026-06-12",
     "frame": "Daily",
@@ -22,7 +33,7 @@
     "symbol": "BTCUSDT"
   },
   "DOGEUSDT": {
-    "active_stop": 0.08543256203703703,
+    "active_stop": 0.0878070001984127,
     "entry_price": 0.08773879999999999,
     "entry_time": "2026-06-12",
     "frame": "Daily",
