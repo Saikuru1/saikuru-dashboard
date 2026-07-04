@@ -1,6 +1,6 @@
 {
   "ADAUSDT": {
-    "active_stop": 0.15661619999999998,
+    "active_stop": 0.174503,
     "entry_price": 0.14686624999999998,
     "entry_time": "2026-06-29",
     "frame": "Daily",
@@ -11,7 +11,7 @@
     "symbol": "ADAUSDT"
   },
   "BTCUSDT": {
-    "active_stop": 59094.41951058201,
+    "active_stop": 59556.31902116402,
     "entry_price": 61474.76364999999,
     "entry_time": "2026-07-02",
     "frame": "Daily",
