@@ -1,13 +1,1 @@
-{
-  "BTCUSDT": {
-    "active_stop": 63268.34397486771,
-    "entry_price": 61474.76364999999,
-    "entry_time": "2026-07-02",
-    "frame": "Daily",
-    "id": "BTCUSDT-2026-07-02",
-    "signal_type": "ENTRY",
-    "status": "open",
-    "stop_type": "310",
-    "symbol": "BTCUSDT"
-  }
-}
+{}
