@@ -1,13 +1,1 @@
-{
-  "ADAUSDT": {
-    "active_stop": 0.1689061,
-    "entry_price": 0.169653075,
-    "entry_time": "2026-07-20",
-    "frame": "Daily",
-    "id": "ADAUSDT-2026-07-20",
-    "signal_type": "ENTRY",
-    "status": "open",
-    "stop_type": "310",
-    "symbol": "ADAUSDT"
-  }
-}
+{}
