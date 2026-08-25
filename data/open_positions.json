@@ -9,16 +9,5 @@
     "status": "open",
     "stop_type": "310",
     "symbol": "BTCUSDT"
-  },
-  "DOGEUSDT": {
-    "active_stop": 0.08572761851851854,
-    "entry_price": 0.070726375,
-    "entry_time": "2026-08-19",
-    "frame": "Daily",
-    "id": "DOGEUSDT-2026-08-19",
-    "signal_type": "ENTRY",
-    "status": "open",
-    "stop_type": "310",
-    "symbol": "DOGEUSDT"
   }
 }
