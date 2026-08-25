@@ -1,6 +1,6 @@
 {
   "BTCUSDT": {
-    "active_stop": 65722.66270502647,
+    "active_stop": 66200.3116468254,
     "entry_price": 64761.5,
     "entry_time": "2026-08-18",
     "frame": "Daily",
@@ -11,7 +11,7 @@
     "symbol": "BTCUSDT"
   },
   "DOGEUSDT": {
-    "active_stop": 0.08341367301587303,
+    "active_stop": 0.08572761851851854,
     "entry_price": 0.070726375,
     "entry_time": "2026-08-19",
     "frame": "Daily",
