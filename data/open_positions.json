@@ -1,6 +1,17 @@
 {
+  "ADAUSDT": {
+    "active_stop": 0.22125699999999998,
+    "entry_price": 0.227517375,
+    "entry_time": "2026-09-19",
+    "frame": "Daily",
+    "id": "ADAUSDT-2026-09-19",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "ADAUSDT"
+  },
   "BCHUSDT": {
-    "active_stop": 226.76151455026456,
+    "active_stop": 231.59941137566142,
     "entry_price": 221.85325,
     "entry_time": "2026-09-17",
     "frame": "Daily",
@@ -11,7 +22,7 @@
     "symbol": "BCHUSDT"
   },
   "BNBUSDT": {
-    "active_stop": 721.5123156084657,
+    "active_stop": 726.3617571428572,
     "entry_price": 740.9678,
     "entry_time": "2026-09-18",
     "frame": "Daily",
@@ -22,7 +33,7 @@
     "symbol": "BNBUSDT"
   },
   "BTCUSDT": {
-    "active_stop": 76617.50248677249,
+    "active_stop": 77098.25519179895,
     "entry_price": 77344.930125,
     "entry_time": "2026-09-18",
     "frame": "Daily",
@@ -31,5 +42,27 @@
     "status": "open",
     "stop_type": "310",
     "symbol": "BTCUSDT"
+  },
+  "DOGEUSDT": {
+    "active_stop": 0.0870682855820106,
+    "entry_price": 0.08890169999999999,
+    "entry_time": "2026-09-19",
+    "frame": "Daily",
+    "id": "DOGEUSDT-2026-09-19",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "DOGEUSDT"
+  },
+  "ETHUSDT": {
+    "active_stop": 2497.1280224867724,
+    "entry_price": 2651.7929499999996,
+    "entry_time": "2026-09-19",
+    "frame": "Daily",
+    "id": "ETHUSDT-2026-09-19",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "ETHUSDT"
   }
 }
