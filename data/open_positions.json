@@ -1,6 +1,6 @@
 {
   "BCHUSDT": {
-    "active_stop": 231.59941137566142,
+    "active_stop": 236.44898809523812,
     "entry_price": 221.85325,
     "entry_time": "2026-09-17",
     "frame": "Daily",
@@ -11,7 +11,7 @@
     "symbol": "BCHUSDT"
   },
   "BNBUSDT": {
-    "active_stop": 726.3617571428572,
+    "active_stop": 731.2224546296296,
     "entry_price": 740.9678,
     "entry_time": "2026-09-18",
     "frame": "Daily",
@@ -22,7 +22,7 @@
     "symbol": "BNBUSDT"
   },
   "BTCUSDT": {
-    "active_stop": 77098.25519179895,
+    "active_stop": 77581.6098478836,
     "entry_price": 77344.930125,
     "entry_time": "2026-09-18",
     "frame": "Daily",
@@ -33,7 +33,7 @@
     "symbol": "BTCUSDT"
   },
   "ETHUSDT": {
-    "active_stop": 2497.1280224867724,
+    "active_stop": 2529.113802910053,
     "entry_price": 2651.7929499999996,
     "entry_time": "2026-09-19",
     "frame": "Daily",
