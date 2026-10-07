@@ -1,13 +1,13 @@
 {
-  "BCHUSDT": {
-    "active_stop": 309.8256613756613,
-    "entry_price": 221.85325,
-    "entry_time": "2026-09-17",
+  "ADAUSDT": {
+    "active_stop": 0.25950409999999996,
+    "entry_price": 0.27733159999999996,
+    "entry_time": "2026-10-06",
     "frame": "Daily",
-    "id": "BCHUSDT-2026-09-17",
+    "id": "ADAUSDT-2026-10-06",
     "signal_type": "ENTRY",
     "status": "open",
     "stop_type": "310",
-    "symbol": "BCHUSDT"
+    "symbol": "ADAUSDT"
   }
 }
