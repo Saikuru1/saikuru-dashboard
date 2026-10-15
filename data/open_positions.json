@@ -9,16 +9,5 @@
     "status": "open",
     "stop_type": "310",
     "symbol": "BCHUSDT"
-  },
-  "DOGEUSDT": {
-    "active_stop": 0.079346,
-    "entry_price": 0.08540297499999999,
-    "entry_time": "2026-10-14",
-    "frame": "Daily",
-    "id": "DOGEUSDT-2026-10-14",
-    "signal_type": "ENTRY",
-    "status": "open",
-    "stop_type": "310",
-    "symbol": "DOGEUSDT"
   }
 }
