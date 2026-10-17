@@ -9,5 +9,16 @@
     "status": "open",
     "stop_type": "310",
     "symbol": "BCHUSDT"
+  },
+  "BTCUSDT": {
+    "active_stop": 79152.4753,
+    "entry_price": 82830.65022499999,
+    "entry_time": "2026-10-16",
+    "frame": "Daily",
+    "id": "BTCUSDT-2026-10-16",
+    "signal_type": "ENTRY",
+    "status": "open",
+    "stop_type": "310",
+    "symbol": "BTCUSDT"
   }
 }
