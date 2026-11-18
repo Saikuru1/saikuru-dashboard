@@ -1,13 +1,1 @@
-{
-  "BCHUSDT": {
-    "active_stop": 210.1609193121693,
-    "entry_price": 211.327,
-    "entry_time": "2026-11-17",
-    "frame": "Daily",
-    "id": "BCHUSDT-2026-11-17",
-    "signal_type": "ENTRY",
-    "status": "open",
-    "stop_type": "310",
-    "symbol": "BCHUSDT"
-  }
-}
+{}
