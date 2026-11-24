@@ -1,6 +1,6 @@
 {
   "BNBUSDT": {
-    "active_stop": 545.9981538359788,
+    "active_stop": 551.3139929232804,
     "entry_price": 552.35745,
     "entry_time": "2026-11-22",
     "frame": "Daily",
@@ -11,7 +11,7 @@
     "symbol": "BNBUSDT"
   },
   "BTCUSDT": {
-    "active_stop": 59450.90400793651,
+    "active_stop": 59981.56801587302,
     "entry_price": 61316.0679,
     "entry_time": "2026-11-22",
     "frame": "Daily",
